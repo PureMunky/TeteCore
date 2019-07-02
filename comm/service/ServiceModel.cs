@@ -14,11 +14,20 @@ namespace Comm.Service
     #endregion
 
     #region Constructors
+    
+    // Empty Constructor
     public ServiceModel()
     {
       this.url = string.Empty;
       this.name = string.Empty;
     }
+
+    // Base Constructor
+    public ServiceModel(string url, string name) {
+      this.url = url;
+      this.name = name;
+    }
+    
   }
   #endregion
 

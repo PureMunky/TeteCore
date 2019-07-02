@@ -1,9 +1,14 @@
 using System;
 
-namespace Comm.Service {
+namespace Comm.Service
+{
 
-  public class ServiceCtrl {
-
+  public class ServiceCtrl
+  {
+    public void Invoke(ServiceRequest request)
+    {
+      
+    }
   }
 
 }
