@@ -15,6 +15,8 @@ namespace Tests.Comm.Cache
 
       Assert.AreEqual(new TimeSpan(0), cc.Life);
       Assert.AreEqual(new TimeSpan(0), cc.AbsoluteLife);
+      Assert.GreaterOrEqual(DateTime.UtcNow, cc.LastAccessed);
+      Assert.GreaterOrEqual(DateTime.UtcNow, cc.Created);
     }
 
     [Test]
@@ -25,6 +27,9 @@ namespace Tests.Comm.Cache
       CacheContract cc = new CacheContract(life, absoluteLife);
 
       Assert.AreEqual(life, cc.Life);
+      Assert.AreEqual(absoluteLife, cc.AbsoluteLife);
+      Assert.GreaterOrEqual(DateTime.UtcNow, cc.LastAccessed);
+      Assert.GreaterOrEqual(DateTime.UtcNow, cc.Created);
     }
 
   }
