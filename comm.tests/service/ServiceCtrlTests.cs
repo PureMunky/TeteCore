@@ -1,7 +1,7 @@
 using NUnit.Framework;
 using Comm.Service;
 
-namespace Tests
+namespace Tests.Comm.Service
 {
   public class ServiceCtrlTests
   {

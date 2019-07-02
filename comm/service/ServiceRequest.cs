@@ -10,7 +10,7 @@ namespace Comm.Service
 
     public string Module;
     public string Service;
-    
+    public string Method;
 
     #endregion
 
@@ -22,10 +22,11 @@ namespace Comm.Service
       this.Service = string.Empty;
     }
 
-public ServiceRequest(string module, string service) {
-  this.Module = module;
-  this.Service = service;
-}
+    public ServiceRequest(string module, string service)
+    {
+      this.Module = module;
+      this.Service = service;
+    }
 
     #endregion
 
