@@ -33,6 +33,50 @@ namespace Tests.Comm.Cache
     }
 
     [Test]
+    public void StoresValueWithExpiredAbsoluteLife()
+    {
+      string name = "test";
+      string value = "testValue";
+      CacheContract contract = new CacheContract(new System.TimeSpan(0), new System.TimeSpan(0));
+
+      CacheStore.Save(name, value, contract);
+
+      string actual = "";
+
+      try
+      {
+        actual = (string)CacheStore.Retrieve(name);
+        Assert.Fail();
+      }
+      catch(CacheException e)
+      {
+        Assert.Pass(e.Message);
+      }
+    }
+
+    [Test]
+    public void StoresValuesWithExpiredLife()
+    {
+      string name = "test";
+      string value = "testValue";
+      CacheContract contract = new CacheContract(new System.TimeSpan(0), new System.TimeSpan(0,30,0));
+
+      CacheStore.Save(name, value, contract);
+      
+      string actual = "";
+
+      try
+      {
+        actual = (string)CacheStore.Retrieve(name);
+        Assert.Fail();
+      }
+      catch(CacheException e)
+      {
+        Assert.Pass(e.Message);
+      }
+    }
+
+    [Test]
     public void ClearsStorage()
     {
       int start = CacheStore.Count();
@@ -45,5 +89,6 @@ namespace Tests.Comm.Cache
       Assert.AreEqual(1, middle);
       Assert.AreEqual(0, final);      
     }
+
   }
 }

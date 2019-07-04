@@ -13,8 +13,8 @@ namespace Tests.Comm.Cache
     {
       CacheContract cc = new CacheContract();
 
-      Assert.AreEqual(new TimeSpan(0), cc.Life);
-      Assert.AreEqual(new TimeSpan(0), cc.AbsoluteLife);
+      Assert.AreEqual(new TimeSpan(0, 30, 0), cc.Life);
+      Assert.AreEqual(new TimeSpan(0, 30, 0), cc.AbsoluteLife);
       Assert.GreaterOrEqual(DateTime.UtcNow, cc.LastAccessed);
       Assert.GreaterOrEqual(DateTime.UtcNow, cc.Created);
     }

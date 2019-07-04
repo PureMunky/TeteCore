@@ -20,8 +20,8 @@ namespace Comm.Cache
     // Empty Constructor
     public CacheContract()
     {
-      this.Life = new TimeSpan(0);
-      this.AbsoluteLife = new TimeSpan(0);
+      this.Life = new TimeSpan(0, 30, 0);
+      this.AbsoluteLife = new TimeSpan(0, 30, 0);
       this.LastAccessed = DateTime.UtcNow;
       this.Created = DateTime.UtcNow;
     }
