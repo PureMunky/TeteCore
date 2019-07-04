@@ -7,10 +7,6 @@ namespace Comm.Cache
   public static class CacheStore
   {
 
-    #region "Public Exceptions"
-
-    #endregion
-
     #region "Private Variables"
 
     private static Hashtable storage = new Hashtable();
