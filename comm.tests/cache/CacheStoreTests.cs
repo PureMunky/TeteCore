@@ -77,6 +77,23 @@ namespace Tests.Comm.Cache
     }
 
     [Test]
+    public void RetrieveMissingValue()
+    {
+      string name = "test";
+      string actual = "";
+
+      try
+      {
+        actual = (string)CacheStore.Retrieve(name);
+        Assert.Fail();
+      }
+      catch(CacheException e)
+      {
+        Assert.Pass(e.Message);
+      }
+    }
+
+    [Test]
     public void ClearsStorage()
     {
       int start = CacheStore.Count();

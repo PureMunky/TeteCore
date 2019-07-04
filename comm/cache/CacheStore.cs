@@ -56,6 +56,10 @@ namespace Comm.Cache
       CacheContract contract = (CacheContract)contracts[name];
       DateTime now = DateTime.UtcNow;
 
+      if(contracts[name] == null || storage[name] == null) {
+        throw new CacheException("Missing Data");
+      }
+
       if(now.Subtract(contract.Created) >= contract.AbsoluteLife) {
         throw new CacheException("Data beyond absolute life.");
       }
