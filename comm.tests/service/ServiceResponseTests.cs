@@ -14,6 +14,7 @@ namespace Tests.Comm.Service
       ServiceResponse sRes = new ServiceResponse(sReq);
 
       Assert.AreSame(sReq, sRes.Request);
+      Assert.IsFalse(sRes.FromCache);
     }
   }
 

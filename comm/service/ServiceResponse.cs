@@ -9,6 +9,7 @@ namespace Comm.Service
     #region "Public Variables"
 
     public ServiceRequest Request;
+    public bool FromCache;
 
     #endregion
 
@@ -17,6 +18,7 @@ namespace Comm.Service
     public ServiceResponse(ServiceRequest request)
     {
       this.Request = request;
+      this.FromCache = false;
     }
 
     #endregion
