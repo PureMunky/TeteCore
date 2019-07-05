@@ -10,6 +10,7 @@ namespace Comm.Service
 
     public ServiceRequest Request;
     public bool FromCache;
+    public string Body;
 
     #endregion
 
@@ -19,6 +20,7 @@ namespace Comm.Service
     {
       this.Request = request;
       this.FromCache = false;
+      this.Body = string.Empty;
     }
 
     #endregion

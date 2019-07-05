@@ -15,6 +15,7 @@ namespace Tests.Comm.Service
 
       Assert.AreSame(sReq, sRes.Request);
       Assert.IsFalse(sRes.FromCache);
+      Assert.AreEqual(string.Empty, sRes.Body);
     }
   }
 
