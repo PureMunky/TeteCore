@@ -1,5 +1,4 @@
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace Comm.Service
@@ -10,7 +9,7 @@ namespace Comm.Service
 
     #region "Private Variables"
 
-    private readonly HttpClient client;
+    private readonly HttpClientService client;
 
     #endregion
 
@@ -18,10 +17,10 @@ namespace Comm.Service
 
     public ServiceCtrl()
     {
-      this.client = new HttpClient();
+      this.client = new HttpClientService();
     }
 
-    public ServiceCtrl(HttpClient client)
+    public ServiceCtrl(HttpClientService client)
     {
       this.client = client;
     }
@@ -58,7 +57,6 @@ namespace Comm.Service
     private async Task<ServiceResponse> SendRequest(ServiceRequest request)
     {
       ServiceResponse response = new ServiceResponse(request);
-      HttpClient client = new HttpClient();
       response.Body = await client.GetStringAsync("http://www.google.com");
 
       return response;

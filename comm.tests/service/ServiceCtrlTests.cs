@@ -19,16 +19,15 @@ namespace Tests.Comm.Service
     [Test]
     public async Task Invoke()
     {
-      var mockHttpClient = new Mock<HttpClient>();
+      string expected = "tests";
+      var mockHttpClient = new HttpClientService(expected);
       var mockTask = new Mock<Task<string>>();
-      mockTask.Setup(x => x.Result = "test");
+
       //http://dontcodetired.com/blog/post/Mocking-in-NET-Core-Tests-with-Moq
       //https://gingter.org/2018/07/26/how-to-mock-httpclient-in-your-net-c-unit-tests/
 
-      mockHttpClient.Setup(x => x.GetStringAsync(It.IsAny<string>())).Returns(mockTask.Object);
-
       ServiceRequest sr = new ServiceRequest("Test", "GetHello");
-      ServiceCtrl sc = new ServiceCtrl();
+      ServiceCtrl sc = new ServiceCtrl(mockHttpClient);
 
       ServiceResponse sRes = await sc.Invoke(sr);
 
@@ -36,7 +35,7 @@ namespace Tests.Comm.Service
       Assert.AreEqual(sr.Module, sRes.Request.Module);
       Assert.AreEqual(sr.Service, sRes.Request.Service);
       Assert.IsFalse(sRes.FromCache);
-      Assert.AreEqual("", sRes.Body);
+      Assert.AreEqual(expected, sRes.Body);
     }
 
     [Test]
