@@ -1,0 +1,9 @@
+language: csharp
+solution: Evocate.sln
+sudo: required
+dist: xenial
+mono: none
+dotnet: 2.2
+script:
+ - dotnet restore
+ - dotnet test
