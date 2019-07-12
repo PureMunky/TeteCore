@@ -1,0 +1,376 @@
+{
+  "comm.dll": {
+    "/home/corbettphil/Projects/Evocate/comm/service/HttpClientService.cs": {
+      "Comm.Service.HttpClientService": {
+        "System.Void Comm.Service.HttpClientService::.ctor()": {
+          "Lines": {
+            "12": 3,
+            "13": 3,
+            "18": 2,
+            "19": 2,
+            "20": 2,
+            "21": 2
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Service.HttpClientService::.ctor(System.String)": {
+          "Lines": {
+            "23": 1,
+            "24": 1,
+            "25": 1,
+            "26": 1,
+            "27": 1
+          },
+          "Branches": []
+        }
+      },
+      "Comm.Service.HttpClientService/<GetStringAsync>d__4": {
+        "System.Void Comm.Service.HttpClientService/<GetStringAsync>d__4::MoveNext()": {
+          "Lines": {
+            "33": 1,
+            "36": 1,
+            "37": 1,
+            "38": 1,
+            "39": 1,
+            "41": 0,
+            "42": 0,
+            "43": 0,
+            "45": 1,
+            "46": 1
+          },
+          "Branches": [
+            {
+              "Line": 36,
+              "Offset": 28,
+              "EndOffset": 30,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/home/corbettphil/Projects/Evocate/comm/service/ServiceCtrl.cs": {
+      "Comm.Service.ServiceCtrl": {
+        "System.Void Comm.Service.ServiceCtrl::.ctor()": {
+          "Lines": {
+            "18": 2,
+            "19": 2,
+            "20": 2,
+            "21": 2,
+            "30": 3
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Service.ServiceCtrl::.ctor(Comm.Service.HttpClientService)": {
+          "Lines": {
+            "23": 1,
+            "24": 1,
+            "25": 1,
+            "26": 1
+          },
+          "Branches": []
+        }
+      },
+      "Comm.Service.ServiceCtrl/<Invoke>d__4": {
+        "System.Void Comm.Service.ServiceCtrl/<Invoke>d__4::MoveNext()": {
+          "Lines": {
+            "33": 3,
+            "34": 3,
+            "35": 3,
+            "36": 3,
+            "38": 3,
+            "39": 3,
+            "40": 2,
+            "41": 2,
+            "42": 2,
+            "43": 1,
+            "44": 1,
+            "45": 1,
+            "46": 1,
+            "48": 3,
+            "49": 1,
+            "50": 1,
+            "51": 1,
+            "52": 1,
+            "54": 3,
+            "55": 3
+          },
+          "Branches": [
+            {
+              "Line": 48,
+              "Offset": 149,
+              "EndOffset": 154,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 1
+            },
+            {
+              "Line": 50,
+              "Offset": 185,
+              "EndOffset": 255,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 1
+            },
+            {
+              "Line": 48,
+              "Offset": 149,
+              "EndOffset": 317,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 3
+            }
+          ]
+        }
+      },
+      "Comm.Service.ServiceCtrl/<SendRequest>d__5": {
+        "System.Void Comm.Service.ServiceCtrl/<SendRequest>d__5::MoveNext()": {
+          "Lines": {
+            "58": 1,
+            "59": 1,
+            "60": 1,
+            "62": 1,
+            "63": 1
+          },
+          "Branches": [
+            {
+              "Line": 60,
+              "Offset": 66,
+              "EndOffset": 135,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 1
+            }
+          ]
+        }
+      }
+    },
+    "/home/corbettphil/Projects/Evocate/comm/service/ServiceModel.cs": {
+      "Comm.Service.ServiceModel": {
+        "System.Void Comm.Service.ServiceModel::.ctor()": {
+          "Lines": {
+            "19": 1,
+            "20": 1,
+            "21": 1,
+            "22": 1,
+            "23": 1
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Service.ServiceModel::.ctor(System.String,System.String)": {
+          "Lines": {
+            "26": 2,
+            "27": 1,
+            "28": 1,
+            "29": 1
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/corbettphil/Projects/Evocate/comm/service/ServiceRequest.cs": {
+      "Comm.Service.ServiceRequest": {
+        "System.Void Comm.Service.ServiceRequest::.ctor()": {
+          "Lines": {
+            "19": 2,
+            "20": 2,
+            "21": 2,
+            "22": 2,
+            "23": 2
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Service.ServiceRequest::.ctor(System.String,System.String)": {
+          "Lines": {
+            "25": 3,
+            "26": 3,
+            "27": 3,
+            "28": 3,
+            "29": 3
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/corbettphil/Projects/Evocate/comm/service/ServiceResponse.cs": {
+      "Comm.Service.ServiceResponse": {
+        "System.Void Comm.Service.ServiceResponse::.ctor(Comm.Service.ServiceRequest)": {
+          "Lines": {
+            "19": 2,
+            "20": 2,
+            "21": 2,
+            "22": 2,
+            "23": 2,
+            "24": 2
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/corbettphil/Projects/Evocate/comm/cache/CacheContract.cs": {
+      "Comm.Cache.CacheContract": {
+        "System.Void Comm.Cache.CacheContract::.ctor()": {
+          "Lines": {
+            "21": 6,
+            "22": 6,
+            "23": 6,
+            "24": 6,
+            "25": 6,
+            "26": 6,
+            "27": 6
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Cache.CacheContract::.ctor(System.TimeSpan,System.TimeSpan)": {
+          "Lines": {
+            "30": 3,
+            "31": 3,
+            "32": 3,
+            "33": 3,
+            "34": 3,
+            "35": 3,
+            "36": 3
+          },
+          "Branches": []
+        }
+      }
+    },
+    "/home/corbettphil/Projects/Evocate/comm/cache/CacheStore.cs": {
+      "Comm.Cache.CacheStore": {
+        "System.Void Comm.Cache.CacheStore::Clear()": {
+          "Lines": {
+            "20": 7,
+            "21": 7,
+            "22": 7
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Cache.CacheStore::Save(System.String,System.Object)": {
+          "Lines": {
+            "32": 2,
+            "33": 2,
+            "34": 2
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Cache.CacheStore::Save(System.String,System.Object,Comm.Cache.CacheContract)": {
+          "Lines": {
+            "43": 5,
+            "44": 5,
+            "45": 5,
+            "46": 5
+          },
+          "Branches": []
+        },
+        "System.Object Comm.Cache.CacheStore::Retrieve(System.String)": {
+          "Lines": {
+            "51": 7,
+            "52": 7,
+            "53": 7,
+            "55": 9,
+            "56": 2,
+            "59": 6,
+            "60": 1,
+            "63": 5,
+            "64": 1,
+            "67": 3,
+            "68": 3
+          },
+          "Branches": [
+            {
+              "Line": 55,
+              "Offset": 35,
+              "EndOffset": 37,
+              "Path": 0,
+              "Ordinal": 0,
+              "Hits": 5
+            },
+            {
+              "Line": 55,
+              "Offset": 35,
+              "EndOffset": 53,
+              "Path": 1,
+              "Ordinal": 1,
+              "Hits": 2
+            },
+            {
+              "Line": 55,
+              "Offset": 56,
+              "EndOffset": 58,
+              "Path": 0,
+              "Ordinal": 2,
+              "Hits": 2
+            },
+            {
+              "Line": 55,
+              "Offset": 56,
+              "EndOffset": 70,
+              "Path": 1,
+              "Ordinal": 3,
+              "Hits": 5
+            },
+            {
+              "Line": 59,
+              "Offset": 96,
+              "EndOffset": 98,
+              "Path": 0,
+              "Ordinal": 4,
+              "Hits": 1
+            },
+            {
+              "Line": 59,
+              "Offset": 96,
+              "EndOffset": 110,
+              "Path": 1,
+              "Ordinal": 5,
+              "Hits": 4
+            },
+            {
+              "Line": 63,
+              "Offset": 138,
+              "EndOffset": 140,
+              "Path": 0,
+              "Ordinal": 6,
+              "Hits": 1
+            },
+            {
+              "Line": 63,
+              "Offset": 138,
+              "EndOffset": 152,
+              "Path": 1,
+              "Ordinal": 7,
+              "Hits": 3
+            }
+          ]
+        },
+        "System.Int32 Comm.Cache.CacheStore::Count()": {
+          "Lines": {
+            "71": 4,
+            "72": 4,
+            "73": 4
+          },
+          "Branches": []
+        },
+        "System.Void Comm.Cache.CacheStore::.cctor()": {
+          "Lines": {
+            "12": 1,
+            "13": 1
+          },
+          "Branches": []
+        }
+      },
+      "Comm.Cache.CacheException": {
+        "System.Void Comm.Cache.CacheException::.ctor(System.String)": {
+          "Lines": {
+            "82": 4,
+            "83": 4,
+            "85": 4
+          },
+          "Branches": []
+        }
+      }
+    }
+  }
+}
