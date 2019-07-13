@@ -1,4 +1,4 @@
-Evocate
+TeteCore
 ========
 
-An evolution of education.
+The core services and applications that drive the TeteLearning platform.
