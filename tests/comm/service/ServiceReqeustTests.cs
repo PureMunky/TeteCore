@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Comm.Service;
+using Tete.Comm.Service;
 
 namespace Tests.Comm.Service
 {

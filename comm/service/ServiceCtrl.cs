@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace Comm.Service
+namespace Tete.Comm.Service
 {
 
   public class ServiceCtrl

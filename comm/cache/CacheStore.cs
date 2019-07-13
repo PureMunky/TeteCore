@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 
-namespace Comm.Cache
+namespace Tete.Comm.Cache
 {
 
   public static class CacheStore

@@ -1,5 +1,5 @@
 using NUnit.Framework;
-using Comm.Service;
+using Tete.Comm.Service;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Moq;

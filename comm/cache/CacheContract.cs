@@ -1,6 +1,6 @@
 using System;
 
-namespace Comm.Cache
+namespace Tete.Comm.Cache
 {
 
   public class CacheContract

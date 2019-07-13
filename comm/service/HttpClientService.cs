@@ -2,7 +2,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Comm.Service
+namespace Tete.Comm.Service
 {
 
   public class HttpClientService

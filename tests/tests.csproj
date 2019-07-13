@@ -21,6 +21,7 @@
     <ProjectReference Include="..\comm\comm.csproj" />
     <ProjectReference Include="..\core\core.csproj" />
     <ProjectReference Include="..\utils\utils.csproj" />
+    <ProjectReference Include="..\module\module.csproj" />
   </ItemGroup>
 
 </Project>

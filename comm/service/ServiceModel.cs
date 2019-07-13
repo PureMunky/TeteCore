@@ -1,6 +1,6 @@
 using System;
 
-namespace Comm.Service
+namespace Tete.Comm.Service
 {
 
   public class ServiceModel
