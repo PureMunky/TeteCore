@@ -1,2 +1,5 @@
 bin/
 obj/
+out/
+coverage/
+coverage.json
