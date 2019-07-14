@@ -17,7 +17,7 @@ namespace core.Controllers
     {
       ServiceCtrl sc = new ServiceCtrl();
 
-      return sc.Invoke(new ServiceRequest("Modules", "GetAll")).Result;
+      return sc.Invoke(new ServiceRequest("Modules", "GetAll"));
     }
 
     // GET api/values/5

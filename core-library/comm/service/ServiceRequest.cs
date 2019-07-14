@@ -10,8 +10,6 @@ namespace Tete.Comm.Service
 
     public string Module;
     public string Service;
-    public string Method;
-
     #endregion
 
     #region Constructors
