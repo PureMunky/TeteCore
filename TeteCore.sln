@@ -3,15 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core", "core\core.csproj", "{5D0A6F7A-243A-4153-8613-72B52F673E86}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core-api", "core-api\core-api.csproj", "{5D0A6F7A-243A-4153-8613-72B52F673E86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "utils", "utils\utils.csproj", "{5094D1BC-F458-428C-9367-CC97B4D5B363}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core-library", "core-library\core-library.csproj", "{452A4E46-F20B-4380-AAFB-5676C2574F74}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm", "comm\comm.csproj", "{63FFDDD2-C6C2-4B81-99CF-7F3386096F8B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "comm.tests", "tests\tests.csproj", "{151618E8-5805-4A73-A682-AF025259293E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "module", "module\module.csproj", "{452A4E46-F20B-4380-AAFB-5676C2574F74}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{E939B801-83E3-49C5-AEC3-E17593731827}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -110,5 +106,17 @@ Global
 		{452A4E46-F20B-4380-AAFB-5676C2574F74}.Release|x64.Build.0 = Release|Any CPU
 		{452A4E46-F20B-4380-AAFB-5676C2574F74}.Release|x86.ActiveCfg = Release|Any CPU
 		{452A4E46-F20B-4380-AAFB-5676C2574F74}.Release|x86.Build.0 = Release|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Debug|x64.Build.0 = Debug|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Debug|x86.Build.0 = Debug|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x64.ActiveCfg = Release|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x64.Build.0 = Release|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x86.ActiveCfg = Release|Any CPU
+		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

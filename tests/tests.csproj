@@ -18,10 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\comm\comm.csproj" />
-    <ProjectReference Include="..\core\core.csproj" />
-    <ProjectReference Include="..\utils\utils.csproj" />
-    <ProjectReference Include="..\module\module.csproj" />
+    <ProjectReference Include="..\core-api\core-api.csproj" />
+    <ProjectReference Include="..\core-library\core-library.csproj" />
   </ItemGroup>
 
 </Project>

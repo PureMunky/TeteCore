@@ -1,14 +1,17 @@
 using NUnit.Framework;
-using Tete.Module;
+using Tete.Modules;
 
-namespace Tests.Module
+namespace Tests.Modules
 {
   public class ModuleTests
   {
     [Test]
     public void EmptyConstructor()
     {
-        Tete.Module.Module m = new Tete.Module.Module();
+        Module m = new Module();
+
+        Assert.IsEmpty(m.Name);
+        Assert.IsEmpty(m.BaseUrl);
     }
   }
 }
