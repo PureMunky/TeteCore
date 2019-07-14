@@ -35,9 +35,18 @@ namespace Tete.Comm.Service
 
     public ServiceResponse Invoke(ServiceRequest request)
     {
-      
+
       object service = Cache.CacheStore.Retrieve(String.Format(SERVICE_TEMPLATE, request.Module, request.Service));
-      return Invoke((HttpService)service).Result;
+
+      HttpService hs = service as HttpService;
+      FunctionService fs = service as FunctionService;
+
+      ServiceResponse rtnResponse = new ServiceResponse(request);
+
+      if (hs != null) { rtnResponse = Invoke(hs).Result; }
+      else if (fs != null) { rtnResponse = Invoke(fs); }
+
+      return rtnResponse;
     }
 
     public void RegisterService(HttpService service)
@@ -96,7 +105,7 @@ namespace Tete.Comm.Service
         Cache.CacheStore.Save(cacheKey, response, defaultContract);
       }
 
-      return response;      
+      return response;
     }
 
     #endregion

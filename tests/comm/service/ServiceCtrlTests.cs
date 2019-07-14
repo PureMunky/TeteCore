@@ -50,6 +50,8 @@ namespace Tests.Comm.Service
       ServiceRequest sr = new ServiceRequest("Test", "GetHello");
       ServiceCtrl sc = new ServiceCtrl();
 
+      sc.RegisterService(new HttpService("Test", "GetHello"));
+
       sc.Invoke(sr);
       ServiceResponse sRes = sc.Invoke(sr);
 
@@ -61,8 +63,10 @@ namespace Tests.Comm.Service
     {
       FunctionService fr = new FunctionService("Test", "GetHello", TestFunction);
       ServiceCtrl sc = new ServiceCtrl();
+      ServiceRequest sr = new ServiceRequest("Test", "GetHello");
 
-      ServiceResponse sRes = sc.Invoke(fr);
+      sc.RegisterService(fr);
+      ServiceResponse sRes = sc.Invoke(sr);
 
       Assert.AreEqual(fr.Module, sRes.Request.Module);
       Assert.AreEqual(fr.Service, sRes.Request.Service);
