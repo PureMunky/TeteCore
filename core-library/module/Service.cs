@@ -1,9 +1,9 @@
 using System;
 
-namespace Tete.Comm.Service
+namespace Tete.Modules
 {
 
-  public class ServiceModel
+  public class Service
   {
 
     #region "Public Variables"
@@ -16,14 +16,14 @@ namespace Tete.Comm.Service
     #region Constructors
     
     // Empty Constructor
-    public ServiceModel()
+    public Service()
     {
       this.url = string.Empty;
       this.name = string.Empty;
     }
 
     // Base Constructor
-    public ServiceModel(string url, string name) {
+    public Service(string url, string name) {
       this.url = url;
       this.name = name;
     }

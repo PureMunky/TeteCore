@@ -52,15 +52,18 @@ namespace Tete.Comm.Cache
       CacheContract contract = (CacheContract)contracts[name];
       DateTime now = DateTime.UtcNow;
 
-      if(contracts[name] == null || storage[name] == null) {
+      if (contracts[name] == null || storage[name] == null)
+      {
         throw new CacheException("Missing Data");
       }
 
-      if(now.Subtract(contract.Created) >= contract.AbsoluteLife) {
+      if (now.Subtract(contract.Created) >= contract.AbsoluteLife)
+      {
         throw new CacheException("Data beyond absolute life.");
       }
 
-      if(now.Subtract(contract.LastAccessed) >= contract.Life) {
+      if (now.Subtract(contract.LastAccessed) >= contract.Life)
+      {
         throw new CacheException("Data beyond life.");
       }
 
@@ -81,7 +84,7 @@ namespace Tete.Comm.Cache
     public CacheException(string message) :
       base(message)
     {
-      
+
     }
   }
 }

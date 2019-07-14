@@ -30,10 +30,11 @@ namespace Tete.Comm.Service
 
     #region "Public Functions"
 
-    public async Task<string> GetStringAsync(string url) {
+    public async Task<string> GetStringAsync(string url)
+    {
       string rtnValue;
 
-      if(mock)
+      if (mock)
       {
         rtnValue = this.mockValue;
       }
