@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 namespace Tete.Comm.Service
 {
 
-  //TODO: Add external url requests as well as internal service requests.
   public class ServiceCtrl : IServiceCtrl
   {
 
@@ -35,13 +34,22 @@ namespace Tete.Comm.Service
 
     public ServiceResponse Invoke(ServiceRequest request)
     {
+      ServiceResponse rtnResponse = new ServiceResponse(request){ Body = "Error" };
+      object service = new object{};
+      try
+      {
+        service = Cache.CacheStore.Retrieve(String.Format(SERVICE_TEMPLATE, request.Module, request.Service));
+      }
+      catch(Exception)
+      {
+        rtnResponse.Body = "Requested service doesn't exist.";
+      }
 
-      object service = Cache.CacheStore.Retrieve(String.Format(SERVICE_TEMPLATE, request.Module, request.Service));
 
       HttpService hs = service as HttpService;
       FunctionService fs = service as FunctionService;
 
-      ServiceResponse rtnResponse = new ServiceResponse(request);
+
 
       if (hs != null) { rtnResponse = Invoke(hs).Result; }
       else if (fs != null) { rtnResponse = Invoke(fs); }
