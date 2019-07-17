@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Tete.Comm.Service;
 
-namespace core.Controllers
+namespace Tete.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
