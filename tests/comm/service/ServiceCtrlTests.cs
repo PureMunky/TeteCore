@@ -10,12 +10,13 @@ namespace Tests.Comm.Service
   public class ServiceCtrlTests
   {
 
+    CacheStore cacheStore = new CacheStore();
     private const string TestingFunctionBody = "testing function body";
 
     [SetUp]
     public void Setup()
     {
-      CacheStore.Clear();
+      cacheStore.Clear();
     }
 
     [Test]
@@ -32,7 +33,7 @@ namespace Tests.Comm.Service
       var mockHttpClient = new HttpClientService(expected);
 
       ServiceRequest sr = new ServiceRequest("Test", "GetHello");
-      ServiceCtrl sc = new ServiceCtrl(mockHttpClient);
+      ServiceCtrl sc = new ServiceCtrl(mockHttpClient, this.cacheStore);
 
       sc.RegisterService(new HttpService("Test", "GetHello"));
 

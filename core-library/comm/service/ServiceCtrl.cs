@@ -10,9 +10,12 @@ namespace Tete.Comm.Service
     #region "Private Variables"
 
     private readonly HttpClientService client;
+    private readonly Cache.ICacheStore cacheStore;
+    
     private Cache.CacheContract defaultContract = new Cache.CacheContract();
     private const string SERVICE_TEMPLATE = "Service.{0}.{1}";
     private const string REQUEST_TEMPLATE = "Request.{0}.{1}.{2}";
+    
 
     #endregion
 
@@ -21,11 +24,13 @@ namespace Tete.Comm.Service
     public ServiceCtrl()
     {
       this.client = new HttpClientService();
+      this.cacheStore = new Cache.CacheStore();
     }
 
-    public ServiceCtrl(HttpClientService client)
+    public ServiceCtrl(HttpClientService client, Cache.ICacheStore cacheStore)
     {
       this.client = client;
+      this.cacheStore = cacheStore;
     }
 
     #endregion
@@ -38,7 +43,7 @@ namespace Tete.Comm.Service
       object service = new object{};
       try
       {
-        service = Cache.CacheStore.Retrieve(String.Format(SERVICE_TEMPLATE, request.Module, request.Service));
+        service = this.cacheStore.Retrieve(String.Format(SERVICE_TEMPLATE, request.Module, request.Service));
       }
       catch(Exception)
       {
@@ -59,11 +64,11 @@ namespace Tete.Comm.Service
 
     public void RegisterService(HttpService service)
     {
-      Cache.CacheStore.Save(String.Format(SERVICE_TEMPLATE, service.Module, service.Service), service);
+      this.cacheStore.Save(String.Format(SERVICE_TEMPLATE, service.Module, service.Service), service);
     }
     public void RegisterService(FunctionService service)
     {
-      Cache.CacheStore.Save(String.Format(SERVICE_TEMPLATE, service.Module, service.Service), service);
+      this.cacheStore.Save(String.Format(SERVICE_TEMPLATE, service.Module, service.Service), service);
     }
 
     public async Task<ServiceResponse> Invoke(HttpService request)
@@ -73,7 +78,7 @@ namespace Tete.Comm.Service
       bool cached = false;
       try
       {
-        response = (ServiceResponse)Cache.CacheStore.Retrieve(cacheKey);
+        response = (ServiceResponse)this.cacheStore.Retrieve(cacheKey);
         response.FromCache = true;
         cached = true;
       }
@@ -85,7 +90,7 @@ namespace Tete.Comm.Service
       if (!cached)
       {
         response = await SendRequest(request);
-        Cache.CacheStore.Save(cacheKey, response, defaultContract);
+        this.cacheStore.Save(cacheKey, response, defaultContract);
       }
 
       return response;
@@ -98,7 +103,7 @@ namespace Tete.Comm.Service
       bool cached = false;
       try
       {
-        response = (ServiceResponse)Cache.CacheStore.Retrieve(cacheKey);
+        response = (ServiceResponse)this.cacheStore.Retrieve(cacheKey);
         response.FromCache = true;
         cached = true;
       }
@@ -110,7 +115,7 @@ namespace Tete.Comm.Service
       if (!cached)
       {
         response = request.ProcessingFunction(request);
-        Cache.CacheStore.Save(cacheKey, response, defaultContract);
+        this.cacheStore.Save(cacheKey, response, defaultContract);
       }
 
       return response;

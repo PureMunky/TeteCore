@@ -4,7 +4,7 @@ using System.Collections;
 namespace Tete.Comm.Cache
 {
 
-  public static class CacheStore
+  public class CacheStore : ICacheStore
   {
 
     #region "Private Variables"
@@ -16,7 +16,7 @@ namespace Tete.Comm.Cache
 
     #region "Public Functions"
 
-    public static void Clear()
+    public void Clear()
     {
       storage.Clear();
     }
@@ -28,7 +28,7 @@ namespace Tete.Comm.Cache
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    public static void Save(string name, object value)
+    public void Save(string name, object value)
     {
       Save(name, value, new CacheContract());
     }
@@ -39,7 +39,7 @@ namespace Tete.Comm.Cache
     /// <param name="name"></param>
     /// <param name="value"></param>
     /// <param name="contract"></param>
-    public static void Save(string name, object value, CacheContract contract)
+    public void Save(string name, object value, CacheContract contract)
     {
       storage[name] = value;
       contracts[name] = contract;
@@ -47,7 +47,7 @@ namespace Tete.Comm.Cache
 
     #endregion
 
-    public static object Retrieve(string name)
+    public object Retrieve(string name)
     {
       CacheContract contract = (CacheContract)contracts[name];
       DateTime now = DateTime.UtcNow;
@@ -70,7 +70,7 @@ namespace Tete.Comm.Cache
       return storage[name];
     }
 
-    public static int Count()
+    public int Count()
     {
       return storage.Count;
     }
