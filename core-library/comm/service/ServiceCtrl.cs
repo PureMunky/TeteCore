@@ -50,11 +50,8 @@ namespace Tete.Comm.Service
         rtnResponse.Body = "Requested service doesn't exist.";
       }
 
-
       HttpService hs = service as HttpService;
       FunctionService fs = service as FunctionService;
-
-
 
       if (hs != null) { rtnResponse = Invoke(hs).Result; }
       else if (fs != null) { rtnResponse = Invoke(fs); }

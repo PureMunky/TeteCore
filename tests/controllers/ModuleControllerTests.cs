@@ -28,5 +28,26 @@ namespace Tests.Controllers
 
       Assert.AreEqual("value", response.Value);
     }
+
+    [Test]
+    public void PostTest()
+    {
+      ModuleController mc = new ModuleController();
+      mc.Post("test");
+    }
+
+    [Test]
+    public void PutTest()
+    {
+      ModuleController mc = new ModuleController();
+      mc.Put(1, "test");
+    }
+
+    [Test]
+    public void DeleteTest()
+    {
+      ModuleController mc = new ModuleController();
+      mc.Delete(1);
+    }
   }
 }
