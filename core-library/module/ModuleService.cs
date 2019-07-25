@@ -38,7 +38,22 @@ namespace Tete.Modules
     {
       List<Module> rtnList = new List<Module>();
 
+      foreach(object o in this.cacheStore.Find("Module."))
+      {
+        rtnList.Add(o as Module);
+      }
+
       return rtnList;
+    }
+
+    public Module Get(string name)
+    {
+      return new Module();
+    }
+
+    public void Create(Module module)
+    {
+
     }
 
     public void Save(Module module)
@@ -46,7 +61,7 @@ namespace Tete.Modules
 
     }
 
-    public void Delete(Module module)
+    public void Delete(string name)
     {
       
     }

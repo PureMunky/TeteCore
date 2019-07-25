@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Tete.Comm.Service;
+using Tete.Modules;
 
 namespace Tete.Controllers
 {
@@ -13,36 +13,41 @@ namespace Tete.Controllers
   {
     // GET api/values
     [HttpGet]
-    public ActionResult<ServiceResponse> Get()
+    public ActionResult<List<Module>> Get()
     {
-      ServiceCtrl sc = new ServiceCtrl();
+      ModuleService ms = new ModuleService();
 
-      return sc.Invoke(new ServiceRequest("Modules", "GetAll"));
+      return ms.GetAll();
     }
 
-    // GET api/values/5
-    [HttpGet("{id}")]
-    public ActionResult<string> Get(int id)
+    // GET api/values/Example
+    [HttpGet("{name}")]
+    public ActionResult<Module> Get(string name)
     {
-      return "value";
+      ModuleService ms = new ModuleService();
+
+      return ms.Get(name);
     }
 
     // POST api/values
     [HttpPost]
-    public void Post([FromBody] string value)
+    public void Post([FromBody] Module module)
     {
+      new ModuleService().Create(module);
     }
 
     // PUT api/values/5
     [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    public void Put([FromBody] Module module)
     {
+      new ModuleService().Save(module);
     }
 
-    // DELETE api/values/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
+    // DELETE api/values/Example
+    [HttpDelete("{name}")]
+    public void Delete(string name)
     {
+      new ModuleService().Delete(name);
     }
   }
 }

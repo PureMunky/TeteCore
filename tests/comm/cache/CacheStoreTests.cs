@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using Tete.Comm.Cache;
+using System.Collections.Generic;
 
 namespace Tests.Comm.Cache
 {
@@ -107,5 +108,16 @@ namespace Tests.Comm.Cache
       Assert.AreEqual(0, final);      
     }
 
+    [Test]
+    public void FindTest()
+    {
+      cacheStore.Save("Test.1", "hello");
+      cacheStore.Save("Test.2", "goodbye");
+      cacheStore.Save("Something.Else", "it doesn't matter");
+      List<object> results = cacheStore.Find("Test.");
+
+      Assert.AreEqual(2, results.Count);
+
+    }
   }
 }

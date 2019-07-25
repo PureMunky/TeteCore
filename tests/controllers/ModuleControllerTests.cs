@@ -1,7 +1,8 @@
 using NUnit.Framework;
 using Tete.Controllers;
-using Tete.Comm.Service;
+using Tete.Modules;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace Tests.Controllers
 {
@@ -13,41 +14,45 @@ namespace Tests.Controllers
     {
       ModuleController mc = new ModuleController();
 
-      ActionResult<ServiceResponse> sr = mc.Get();
-
-      Assert.AreEqual("Modules", sr.Value.Request.Module);
-      Assert.AreEqual("GetAll", sr.Value.Request.Service);
-      Assert.IsFalse(sr.Value.FromCache);
+      ActionResult<List<Module>> sr = mc.Get();
+      Assert.Inconclusive();
     }
 
     [Test]
     public void GetOne()
     {
+      string name = "Example";
       ModuleController mc = new ModuleController();
-      ActionResult<string> response = mc.Get(1);
+      ActionResult<Module> response = mc.Get(name);
 
-      Assert.AreEqual("value", response.Value);
+      Assert.AreEqual(name, response.Value.Name);
     }
 
     [Test]
     public void PostTest()
     {
+      Module m = new Module();
       ModuleController mc = new ModuleController();
-      mc.Post("test");
+      mc.Post(m);
+      Assert.Inconclusive();
     }
 
     [Test]
     public void PutTest()
     {
+      Module m = new Module();
       ModuleController mc = new ModuleController();
-      mc.Put(1, "test");
+      mc.Put(m);
+      Assert.Inconclusive();
     }
 
     [Test]
     public void DeleteTest()
     {
+      string name = "Example";
       ModuleController mc = new ModuleController();
-      mc.Delete(1);
+      mc.Delete(name);
+      Assert.Inconclusive();
     }
   }
 }

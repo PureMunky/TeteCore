@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Tete.Comm.Cache
 {
   public interface ICacheStore
@@ -7,5 +9,6 @@ namespace Tete.Comm.Cache
     void Save(string name, object value, CacheContract contract);
     object Retrieve(string name);
     int Count();
+    List<object> Find(string search);
   }
 }
