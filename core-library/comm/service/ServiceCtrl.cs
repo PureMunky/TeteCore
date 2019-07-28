@@ -43,11 +43,11 @@ namespace Tete.Comm.Service
       object service = new object{};
       try
       {
-        service = this.cacheStore.Retrieve(String.Format(SERVICE_TEMPLATE, request.Module, request.Service));
+        service = this.cacheStore.Retrieve(new Cache.CacheName(String.Format(SERVICE_TEMPLATE, request.Module, request.Service)));
       }
-      catch(Exception)
+      catch(Exception e)
       {
-        rtnResponse.Body = "Requested service doesn't exist.";
+        rtnResponse.Body = "Requested service doesn't exist. " + e.Message;
       }
 
       HttpService hs = service as HttpService;
@@ -61,17 +61,17 @@ namespace Tete.Comm.Service
 
     public void RegisterService(HttpService service)
     {
-      this.cacheStore.Save(String.Format(SERVICE_TEMPLATE, service.Module, service.Service), service);
+      this.cacheStore.Save(new Cache.CacheName(String.Format(SERVICE_TEMPLATE, service.Module, service.Service)), service);
     }
     public void RegisterService(FunctionService service)
     {
-      this.cacheStore.Save(String.Format(SERVICE_TEMPLATE, service.Module, service.Service), service);
+      this.cacheStore.Save(new Cache.CacheName(String.Format(SERVICE_TEMPLATE, service.Module, service.Service)), service);
     }
 
     public async Task<ServiceResponse> Invoke(HttpService request)
     {
       ServiceResponse response = null;
-      string cacheKey = String.Format(REQUEST_TEMPLATE, request.Module, request.Service, request.Method);
+      Cache.CacheName cacheKey = new Cache.CacheName(String.Format(REQUEST_TEMPLATE, request.Module, request.Service, request.Method));
       bool cached = false;
       try
       {
@@ -79,6 +79,7 @@ namespace Tete.Comm.Service
         response.FromCache = true;
         cached = true;
       }
+
       catch (Cache.CacheException)
       {
         cached = false;
@@ -96,7 +97,7 @@ namespace Tete.Comm.Service
     public ServiceResponse Invoke(FunctionService request)
     {
       ServiceResponse response = null;
-      string cacheKey = String.Format(REQUEST_TEMPLATE, request.Module, request.Service, request.ProcessingFunction.ToString());
+      Cache.CacheName cacheKey = new Cache.CacheName(String.Format(REQUEST_TEMPLATE, request.Module, request.Service, request.ProcessingFunction.ToString()));
       bool cached = false;
       try
       {

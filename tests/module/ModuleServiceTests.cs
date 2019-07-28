@@ -13,9 +13,9 @@ namespace Tests.Modules
     public void GetsModules()
     {
       var mockCacheStore = new Mock<Tete.Comm.Cache.ICacheStore>();
-      mockCacheStore.Setup(x => x.Retrieve("")).Returns(new object() {});
+      mockCacheStore.Setup(x => x.Retrieve(new Tete.Comm.Cache.CacheName(""))).Returns(new object() {});
       ModuleService ms = new ModuleService(mockCacheStore.Object);
-
+      Assert.Inconclusive();
 
     }
   }

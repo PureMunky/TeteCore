@@ -22,7 +22,12 @@ namespace Tests.Controllers
     public void GetOne()
     {
       string name = "Example";
+      string baseUrl = "https://test.com";
+      
       ModuleController mc = new ModuleController();
+      ModuleService ms = new ModuleService();
+      ms.Save(new Module(name, baseUrl));
+
       ActionResult<Module> response = mc.Get(name);
 
       Assert.AreEqual(name, response.Value.Name);

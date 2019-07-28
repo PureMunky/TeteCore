@@ -48,7 +48,7 @@ namespace Tete.Modules
 
     public Module Get(string name)
     {
-      return new Module();
+      return this.cacheStore.Retrieve(new Comm.Cache.CacheName(String.Format("Module.{0}", name))) as Module;
     }
 
     public void Create(Module module)
@@ -58,7 +58,7 @@ namespace Tete.Modules
 
     public void Save(Module module)
     {
-
+        this.cacheStore.Save(module);
     }
 
     public void Delete(string name)

@@ -41,7 +41,7 @@ namespace Tete.Comm.Cache
     /// </summary>
     /// <param name="name"></param>
     /// <param name="value"></param>
-    public void Save(string name, object value)
+    public void Save(CacheName name, object value)
     {
       Save(name, value, new CacheContract());
     }
@@ -52,19 +52,24 @@ namespace Tete.Comm.Cache
     /// <param name="name"></param>
     /// <param name="value"></param>
     /// <param name="contract"></param>
-    public void Save(string name, object value, CacheContract contract)
+    public void Save(CacheName name, object value, CacheContract contract)
     {
-      storage[name] = value;
-      contracts[name] = contract;
+      storage[name.ToString()] = value;
+      contracts[name.ToString()] = contract;
+    }
+
+    public void Save(Tete.Modules.Module module)
+    {
+      Save(GetObjectName(module), module, new CacheContract());
     }
 
     #endregion
 
-    public object Retrieve(string name)
+    public object Retrieve(CacheName name)
     {
-      ContractResult result = IsExpired(name);
+      ContractResult result = IsExpired(name.ToString());
 
-      if (contracts[name] == null || storage[name] == null)
+      if (contracts[name.ToString()] == null || storage[name.ToString()] == null)
       {
         throw new CacheException("Missing Data");
       }
@@ -79,7 +84,7 @@ namespace Tete.Comm.Cache
         throw new CacheException("Data beyond life.");
       }
 
-      return storage[name];
+      return storage[name.ToString()];
     }
 
     public List<object> Find(string search)
@@ -90,7 +95,7 @@ namespace Tete.Comm.Cache
       {
         if (key.Contains(search) && IsExpired(key) == ContractResult.Accessible)
         {
-          rtnList.Add(storage[key]);
+          rtnList.Add(storage[key.ToString()]);
         }
       }
 
@@ -102,6 +107,15 @@ namespace Tete.Comm.Cache
       return storage.Count;
     }
 
+    #region "GetObjectName"
+
+    public CacheName GetObjectName(Tete.Modules.Module module)
+    {
+      return new CacheName(String.Format("Module.{0}", module.Name));
+    }
+
+    #endregion
+
     #endregion
 
     #region "Private Functions"
@@ -109,7 +123,7 @@ namespace Tete.Comm.Cache
     private ContractResult IsExpired(string name)
     {
       ContractResult rtnResult = ContractResult.Missing;
-      CacheContract contract = (CacheContract)contracts[name];
+      CacheContract contract = (CacheContract)contracts[name.ToString()];
       DateTime now = DateTime.UtcNow;
       if (contract != null)
       {

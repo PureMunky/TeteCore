@@ -23,7 +23,7 @@ namespace Tests.Comm.Cache
     [Test]
     public void StoresValues()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test1");
       string value = "testValue";
 
       cacheStore.Save(name, value);
@@ -36,7 +36,7 @@ namespace Tests.Comm.Cache
     [Test]
     public void StoresValueWithExpiredAbsoluteLife()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test2");
       string value = "testValue";
       CacheContract contract = new CacheContract(new System.TimeSpan(0), new System.TimeSpan(0));
 
@@ -58,7 +58,7 @@ namespace Tests.Comm.Cache
     [Test]
     public void StoresValuesWithExpiredLife()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test3");
       string value = "testValue";
       CacheContract contract = new CacheContract(new System.TimeSpan(0), new System.TimeSpan(0,30,0));
 
@@ -80,7 +80,7 @@ namespace Tests.Comm.Cache
     [Test]
     public void RetrieveMissingValue()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test.4");
       string actual = "";
 
       try
@@ -98,7 +98,7 @@ namespace Tests.Comm.Cache
     public void ClearsStorage()
     {
       int start = cacheStore.Count();
-      cacheStore.Save("fake", "data");
+      cacheStore.Save(new CacheName("Test.fake"), "data");
       int middle = cacheStore.Count();
       cacheStore.Clear();
       int final = cacheStore.Count();
@@ -111,13 +111,21 @@ namespace Tests.Comm.Cache
     [Test]
     public void FindTest()
     {
-      cacheStore.Save("Test.1", "hello");
-      cacheStore.Save("Test.2", "goodbye");
-      cacheStore.Save("Something.Else", "it doesn't matter");
+      cacheStore.Save(new CacheName("Test.1"), "hello");
+      cacheStore.Save(new CacheName("Test.2"), "goodbye");
+      cacheStore.Save(new CacheName("Something.Else"), "it doesn't matter");
       List<object> results = cacheStore.Find("Test.");
 
       Assert.AreEqual(2, results.Count);
 
+    }
+
+    [Test]
+    public void StoreModule()
+    {
+      cacheStore.Save(new Tete.Modules.Module(){
+        Name = "test"
+      });
     }
   }
 }
