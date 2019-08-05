@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "core-library", "core-librar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "tests\tests.csproj", "{E939B801-83E3-49C5-AEC3-E17593731827}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tete-web", "tete-web\tete-web.csproj", "{E9A81378-408D-4D04-AE3C-C187022FF286}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,5 +120,17 @@ Global
 		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x64.Build.0 = Release|Any CPU
 		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x86.ActiveCfg = Release|Any CPU
 		{E939B801-83E3-49C5-AEC3-E17593731827}.Release|x86.Build.0 = Release|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Debug|x64.Build.0 = Debug|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Debug|x86.Build.0 = Debug|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Release|x64.ActiveCfg = Release|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Release|x64.Build.0 = Release|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Release|x86.ActiveCfg = Release|Any CPU
+		{E9A81378-408D-4D04-AE3C-C187022FF286}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

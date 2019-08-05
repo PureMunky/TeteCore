@@ -26,11 +26,14 @@ namespace Tests.Controllers
       
       ModuleController mc = new ModuleController();
       ModuleService ms = new ModuleService();
-      ms.Save(new Module(name, baseUrl));
+      Module m = new Module(name, baseUrl);
 
+      ms.Save(m);
+      
       ActionResult<Module> response = mc.Get(name);
 
-      Assert.AreEqual(name, response.Value.Name);
+
+      Assert.AreEqual(m.Name, response.Value.Name);
     }
 
     [Test]

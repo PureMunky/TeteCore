@@ -10,8 +10,8 @@ namespace Tete.Comm.Cache
 
     #region "Private Variables"
 
-    private static Hashtable storage = new Hashtable();
-    private static Hashtable contracts = new Hashtable();
+    private static Dictionary<CacheName, object> storage = new Dictionary<CacheName, object>();
+    private static Dictionary<CacheName, CacheContract> contracts = new Dictionary<CacheName, CacheContract>();
 
     #endregion
 
@@ -54,8 +54,8 @@ namespace Tete.Comm.Cache
     /// <param name="contract"></param>
     public void Save(CacheName name, object value, CacheContract contract)
     {
-      storage[name.ToString()] = value;
-      contracts[name.ToString()] = contract;
+      storage[name] = value;
+      contracts[name] = contract;
     }
 
     public void Save(Tete.Modules.Module module)
@@ -67,11 +67,25 @@ namespace Tete.Comm.Cache
 
     public object Retrieve(CacheName name)
     {
-      ContractResult result = IsExpired(name.ToString());
+      ContractResult result = IsExpired(name);
 
-      if (contracts[name.ToString()] == null || storage[name.ToString()] == null)
+      Console.WriteLine(name);
+      Console.WriteLine(storage.Keys.Count);
+      foreach(CacheName key in storage.Keys)
       {
-        throw new CacheException("Missing Data");
+        Console.WriteLine(key);
+        Console.WriteLine(storage[key]);
+        Console.WriteLine(contracts[key]);
+      }
+
+      if(!storage.ContainsKey(name))
+      {
+        throw new CacheException("Mising Data");
+      }
+
+      if (!contracts.ContainsKey(name))
+      {
+        throw new CacheException("Missing Contract");
       }
 
       if (result == ContractResult.AbsoluteExpired)
@@ -84,18 +98,18 @@ namespace Tete.Comm.Cache
         throw new CacheException("Data beyond life.");
       }
 
-      return storage[name.ToString()];
+      return storage[name];
     }
 
     public List<object> Find(string search)
     {
       List<object> rtnList = new List<object>();
 
-      foreach (string key in storage.Keys)
+      foreach (CacheName key in storage.Keys)
       {
         if (key.Contains(search) && IsExpired(key) == ContractResult.Accessible)
         {
-          rtnList.Add(storage[key.ToString()]);
+          rtnList.Add(storage[key]);
         }
       }
 
@@ -111,7 +125,10 @@ namespace Tete.Comm.Cache
 
     public CacheName GetObjectName(Tete.Modules.Module module)
     {
-      return new CacheName(String.Format("Module.{0}", module.Name));
+
+      CacheName rtnValue = new CacheName(String.Format("Module.{0}", module.Name));
+Console.WriteLine(rtnValue.Value);
+      return rtnValue;
     }
 
     #endregion
@@ -120,14 +137,15 @@ namespace Tete.Comm.Cache
 
     #region "Private Functions"
 
-    private ContractResult IsExpired(string name)
+    private ContractResult IsExpired(CacheName name)
     {
       ContractResult rtnResult = ContractResult.Missing;
-      CacheContract contract = (CacheContract)contracts[name.ToString()];
       DateTime now = DateTime.UtcNow;
-      if (contract != null)
+      if (contracts.ContainsKey(name) && contracts[name] != null)
       {
+        CacheContract contract = contracts[name];
         rtnResult = ContractResult.Accessible;
+
         if (now.Subtract(contract.Created) >= contract.AbsoluteLife)
         {
           rtnResult = ContractResult.AbsoluteExpired;

@@ -81,11 +81,10 @@ namespace Tests.Comm.Cache
     public void RetrieveMissingValue()
     {
       CacheName name = new CacheName("Test.test.4");
-      string actual = "";
 
       try
       {
-        actual = (string)cacheStore.Retrieve(name);
+        cacheStore.Retrieve(name);
         Assert.Fail();
       }
       catch(CacheException e)
