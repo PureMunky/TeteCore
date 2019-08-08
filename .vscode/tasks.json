@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/core/core.csproj"
+                "${workspaceFolder}/core-api/core-api.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -17,7 +17,7 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/core/core.csproj"
+                "${workspaceFolder}/core-api/core-api.csproj"
             ],
             "problemMatcher": "$tsc"
         },
@@ -28,7 +28,7 @@
             "args": [
                 "watch",
                 "run",
-                "${workspaceFolder}/core/core.csproj"
+                "${workspaceFolder}/core-api/core-api.csproj"
             ],
             "problemMatcher": "$tsc"
         }

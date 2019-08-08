@@ -1,6 +1,6 @@
 using System;
 using NUnit.Framework;
-using Comm.Cache;
+using Tete.Comm.Cache;
 
 namespace Tests.Comm.Cache
 {

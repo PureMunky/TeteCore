@@ -1,33 +1,34 @@
 using NUnit.Framework;
-using Comm.Cache;
+using Tete.Comm.Cache;
+using System.Collections.Generic;
 
 namespace Tests.Comm.Cache
 {
 
   public class CacheStoreTests
   {
-
+    CacheStore cacheStore = new CacheStore();
     [SetUp]
     public void Setup()
     {
-      CacheStore.Clear();
+      cacheStore.Clear();
     }
 
     [Test]
     public void InitialState()
     {
-      Assert.AreEqual(0, CacheStore.Count());
+      Assert.AreEqual(0, cacheStore.Count());
     }
 
     [Test]
     public void StoresValues()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test1");
       string value = "testValue";
 
-      CacheStore.Save(name, value);
+      cacheStore.Save(name, value);
 
-      string actual = (string)CacheStore.Retrieve(name);
+      string actual = (string)cacheStore.Retrieve(name);
 
       Assert.AreEqual(value, actual);
     }
@@ -35,17 +36,17 @@ namespace Tests.Comm.Cache
     [Test]
     public void StoresValueWithExpiredAbsoluteLife()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test2");
       string value = "testValue";
       CacheContract contract = new CacheContract(new System.TimeSpan(0), new System.TimeSpan(0));
 
-      CacheStore.Save(name, value, contract);
+      cacheStore.Save(name, value, contract);
 
       string actual = "";
 
       try
       {
-        actual = (string)CacheStore.Retrieve(name);
+        actual = (string)cacheStore.Retrieve(name);
         Assert.Fail();
       }
       catch(CacheException e)
@@ -57,17 +58,17 @@ namespace Tests.Comm.Cache
     [Test]
     public void StoresValuesWithExpiredLife()
     {
-      string name = "test";
+      CacheName name = new CacheName("Test.test3");
       string value = "testValue";
       CacheContract contract = new CacheContract(new System.TimeSpan(0), new System.TimeSpan(0,30,0));
 
-      CacheStore.Save(name, value, contract);
+      cacheStore.Save(name, value, contract);
       
       string actual = "";
 
       try
       {
-        actual = (string)CacheStore.Retrieve(name);
+        actual = (string)cacheStore.Retrieve(name);
         Assert.Fail();
       }
       catch(CacheException e)
@@ -79,12 +80,11 @@ namespace Tests.Comm.Cache
     [Test]
     public void RetrieveMissingValue()
     {
-      string name = "test";
-      string actual = "";
+      CacheName name = new CacheName("Test.test.4");
 
       try
       {
-        actual = (string)CacheStore.Retrieve(name);
+        cacheStore.Retrieve(name);
         Assert.Fail();
       }
       catch(CacheException e)
@@ -96,16 +96,35 @@ namespace Tests.Comm.Cache
     [Test]
     public void ClearsStorage()
     {
-      int start = CacheStore.Count();
-      CacheStore.Save("fake", "data");
-      int middle = CacheStore.Count();
-      CacheStore.Clear();
-      int final = CacheStore.Count();
+      int start = cacheStore.Count();
+      cacheStore.Save(new CacheName("Test.fake"), "data");
+      int middle = cacheStore.Count();
+      cacheStore.Clear();
+      int final = cacheStore.Count();
 
       Assert.AreEqual(0, start);
       Assert.AreEqual(1, middle);
       Assert.AreEqual(0, final);      
     }
 
+    [Test]
+    public void FindTest()
+    {
+      cacheStore.Save(new CacheName("Test.1"), "hello");
+      cacheStore.Save(new CacheName("Test.2"), "goodbye");
+      cacheStore.Save(new CacheName("Something.Else"), "it doesn't matter");
+      List<object> results = cacheStore.Find("Test.");
+
+      Assert.AreEqual(2, results.Count);
+
+    }
+
+    [Test]
+    public void StoreModule()
+    {
+      cacheStore.Save(new Tete.Modules.Module(){
+        Name = "test"
+      });
+    }
   }
 }
