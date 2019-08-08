@@ -1,10 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
 namespace Tete.Modules
 {
 
-  public class ModuleService
+  public class ModuleService : DbContext
   {
 
     #region "Private Variables"
@@ -13,9 +14,16 @@ namespace Tete.Modules
 
     #endregion
 
+    public DbSet<Module> Modules {get;set;}
+
     #region Constructors
 
-    public ModuleService()
+public ModuleService()
+{
+  this.cacheStore = new Tete.Comm.Cache.CacheStore();
+}
+
+    public ModuleService(DbContextOptions<ModuleService> options) : base(options)
     {
       this.cacheStore = new Tete.Comm.Cache.CacheStore();
     }

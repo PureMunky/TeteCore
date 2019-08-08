@@ -6,14 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Tete
+namespace Tete.Api
 {
     public class Startup
     {
@@ -28,14 +26,6 @@ namespace Tete
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.AddDbContextPool<Modules.ModuleService>(
-              options => options.UseMySql("Server=localhost;Database=Tete;User=root;Password=rootpass;",
-                mysqlOptions => {
-                  mysqlOptions.ServerVersion(new Version(5, 7, 17), ServerType.MariaDb);
-                }
-              )
-            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,7 +43,6 @@ namespace Tete
 
             app.UseHttpsRedirection();
             app.UseMvc();
-            RegisterServices.Initialize();
         }
     }
 }
