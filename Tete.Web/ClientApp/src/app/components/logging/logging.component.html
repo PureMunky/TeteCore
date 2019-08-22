@@ -1,0 +1,24 @@
+<h1>Logs</h1>
+
+<table class="table table-striped" *ngIf="Logs">
+  <thead>
+    <tr>
+      <th>DateTime</th>
+      <th>Domain</th>
+      <th>Description</th>
+      <th>Data</th>
+      <th>Machine Name</th>
+      <th>StackTrace</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let log of Logs">
+      <td>{{ log.occured }}</td>
+      <td>{{ log.domain }}</td>
+      <td>{{ log.description }}</td>
+      <td title="{{ log.data }}">{{ log.data.substr(0, 30) }}</td>
+      <td>{{ log.machineName }}</td>
+      <td title="{{ log.stackTrace }}">{{ log.stackTrace.substr(0, 30) }}</td>
+    </tr>
+  </tbody>
+</table>

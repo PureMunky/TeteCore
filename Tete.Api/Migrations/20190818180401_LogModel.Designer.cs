@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tete.Api.Contexts;
 
 namespace Tete.Api.Migrations
 {
     [DbContext(typeof(MainContext))]
-    partial class MainContextModelSnapshot : ModelSnapshot
+    [Migration("20190818180401_LogModel")]
+    partial class LogModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -58,11 +60,7 @@ namespace Tete.Api.Migrations
                     b.Property<Guid>("LogId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Data");
-
                     b.Property<string>("Description");
-
-                    b.Property<string>("Domain");
 
                     b.Property<string>("MachineName");
 
