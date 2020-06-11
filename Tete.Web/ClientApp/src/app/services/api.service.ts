@@ -6,30 +6,25 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 })
 export class ApiService {
   private http: HttpClient;
-  private baseUrl: string;
   private user;
 
-  constructor(http: HttpClient, @Inject("BASE_URL") baseUrl: string) {
+  constructor(http: HttpClient) {
     this.http = http;
-    this.baseUrl = baseUrl;
   }
 
-  get(request: Request) {
+  get(url):Promise<object[]> {
     return this.http
-      .post<Response>(this.baseUrl + "api/Request", request)
+      .get<Response>(url)
       .toPromise()
-      .then(
-        result => {
-          return result.data;
-        },
-        error => console.error(error)
-      )
+      .then(result => {
+        return result.data;
+      })
       .catch(this.handleError);
   }
 
   authTest() {
     return this.http
-      .get(this.baseUrl + "Login/CurrentUser")
+      .get("/Login/CurrentUser")
       .toPromise()
       .then(user => {
         console.log(user);
@@ -41,7 +36,14 @@ export class ApiService {
 
   post(url: string, body: object) {
     return this.http
-      .post(this.baseUrl + url, body)
+      .post(url, body)
+      .toPromise()
+      .catch(this.handleError);
+  }
+
+  put(url: string, body: object) {
+    return this.http
+      .put(url, body)
       .toPromise()
       .catch(this.handleError);
   }
@@ -51,12 +53,13 @@ export class ApiService {
       // UnAuthorized
       window.location.href = "/Login";
     }
+    return [{}];
   }
 }
 
 interface Response {
   request: Request;
-  data: string;
+  data: object[];
   error: boolean;
   message: string;
   status: number;
