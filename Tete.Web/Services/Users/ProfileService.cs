@@ -11,34 +11,11 @@ namespace Tete.Api.Services.Users
   {
 
     private UserLanguageService userLanguageService;
+    private Logging.LogService logService;
 
     public ProfileService(MainContext mainContext, UserVM actor)
     {
       FillData(mainContext, actor);
-    }
-
-    public ProfileService(MainContext mainContext, User actor)
-    {
-      FillData(mainContext, new UserVM());
-      this.Actor = GetUser(actor);
-    }
-
-    public UserVM GetUser(Guid UserId)
-    {
-      return GetUser(this.mainContext.Users.Where(u => u.Id == UserId).FirstOrDefault());
-    }
-
-    public UserVM GetUser(User user)
-    {
-      var languages = this.userLanguageService.GetUserLanguages(user.Id);
-      var profiles = this.mainContext.UserProfiles.Where(p => p.UserId == user.Id).FirstOrDefault();
-      var roles = this.mainContext.AccessRoles.Where(r => r.UserId == user.Id).ToList();
-      return new UserVM(
-        user,
-        languages,
-        profiles,
-        roles
-      );
     }
 
     public void SaveProfile(Profile profile)
@@ -51,12 +28,16 @@ namespace Tete.Api.Services.Users
       }
       else
       {
-        prof.About = profile.About;
-        prof.PrivateAbout = profile.PrivateAbout;
-        this.mainContext.UserProfiles.Update(prof);
+        if (
+          prof.UserId == this.Actor.UserId
+          || this.Actor.Roles.Contains("Admin")
+          )
+        {
+          prof.About = profile.About;
+          prof.PrivateAbout = profile.PrivateAbout;
+          this.mainContext.UserProfiles.Update(prof);
+        }
       }
-
-
       this.mainContext.SaveChanges();
     }
 
@@ -64,7 +45,8 @@ namespace Tete.Api.Services.Users
     {
       this.mainContext = mainContext;
       this.Actor = actor;
-      this.userLanguageService = new UserLanguageService(mainContext);
+      this.userLanguageService = new UserLanguageService(mainContext, actor);
+      this.logService = new Logging.LogService(mainContext, Logging.LogService.LoggingLayer.Api);
     }
   }
 }

@@ -1,7 +1,58 @@
 <h1>{{user.displayName}}</h1>
+<span>Username: {{user.userName}}</span>
 
-<input type="text" [(ngModel)]="user.profile.about" />
+<div *ngIf="working.editing">
 
-<button (click)="save()">Save</button>
+  <h2>About</h2>
+  <div>
+    <span id="txtDisplaynameLabel">Name</span><br />
+    <input type="text" aria-labelledby="txtDisplaynameLabel" id="txtDisplayName" [(ngModel)]="user.displayName" />
+  </div>
+  <div>
+    <span id="txtAboutLabel">About</span><br />
+    <textarea id="txtAbout" aria-labelledby="txtAboutLabel" [(ngModel)]="user.profile.about"></textarea>
+  </div>
 
-<div *ngFor="let lang of languages">{{lang.name}}</div>
+  <div>
+    <span aria-labelledby="txtPrivateAbout">Private About</span><br />
+    <textarea id="txtPrivateAbout" [(ngModel)]="user.profile.privateAbout"></textarea>
+  </div>
+
+  <h2>Languages</h2>
+  <div>
+    Language
+    <select [(ngModel)]="tmpModel.language">
+      <option>Select</option>
+      <option *ngFor="let lang of languages" value="{{lang.languageId}}">{{lang.name}}</option>
+    </select>
+    <button (click)="addLanguage()">Add</button>
+  </div>
+  <div>
+    <div *ngFor="let lang of user.languages">
+      <h3>{{getLangName(lang.languageId)}}</h3>
+      <button (click)="removeLanguage(lang.languageId)">Remove</button>
+      <div>
+        <input id="chkRead.{{lang.languageId}}" type="checkbox" [(ngModel)]="lang.read" title="Read" />
+        <label for="chkRead.{{lang.languageId}}">Read</label>
+      </div>
+      <div>
+        <input id="chkSpeak.{{lang.languageId}}" type="checkbox" [(ngModel)]="lang.speak" />
+        <label for="chkSpeak.{{lang.languageId}}">Speak</label>
+      </div>
+    </div>
+  </div>
+  <button (click)="save()">Save</button><button (click)="cancel()">Cancel</button>
+</div>
+<div *ngIf="!working.editing">
+  <button *ngIf="working.self" (click)="working.editing = true;">Edit</button>
+  <div>
+    <h2>About</h2>
+    <div>{{user.profile.about}}</div>
+    <h2>Languages</h2>
+    <div>
+      <div *ngFor="let lang of user.languages">
+        {{getLangName(lang.languageId)}}
+      </div>
+    </div>
+  </div>
+</div>

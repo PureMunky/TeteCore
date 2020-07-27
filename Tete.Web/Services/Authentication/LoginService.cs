@@ -93,7 +93,7 @@ namespace Tete.Api.Services.Authentication
 
       if (user != null)
       {
-        userVM = new ProfileService(mainContext, user).GetUser(user);
+        userVM = new UserService(mainContext, user).GetUser(user);
       }
 
       return userVM;
@@ -147,12 +147,34 @@ namespace Tete.Api.Services.Authentication
     /// <param name="UserId"></param>
     /// <param name="CreatedById"></param>
     /// <param name="RoleName"></param>
-    public void GrantRole(Guid UserId, Guid CreatedById, String RoleName)
+    public bool GrantRole(Guid UserId, Guid CreatedById, String RoleName)
     {
-      var role = new AccessRole(UserId, RoleName);
-      role.CreatedBy = CreatedById;
-      this.mainContext.AccessRoles.Add(role);
-      this.mainContext.SaveChanges();
+      bool created = false;
+      var testRole = this.mainContext.AccessRoles.Where(r => r.UserId == UserId && r.Name == RoleName).FirstOrDefault();
+
+      if (testRole == null)
+      {
+        created = true;
+        var role = new AccessRole(UserId, RoleName);
+        role.CreatedBy = CreatedById;
+        this.mainContext.AccessRoles.Add(role);
+        this.mainContext.SaveChanges();
+      }
+
+      return created;
+    }
+
+    public UserVM GetUserVMFromUsername(string userName, UserVM actor)
+    {
+      var user = this.mainContext.Users.Where(u => u.UserName == userName).FirstOrDefault();
+      UserVM userVM = null;
+
+      if (user != null)
+      {
+        userVM = new UserService(mainContext, actor).GetUser(user);
+      }
+
+      return userVM;
     }
   }
 }

@@ -12,7 +12,7 @@ export class ApiService {
     this.http = http;
   }
 
-  get(url):Promise<object[]> {
+  get(url): Promise<any[]> {
     return this.http
       .get<Response>(url)
       .toPromise()
@@ -27,7 +27,6 @@ export class ApiService {
       .get("/Login/CurrentUser")
       .toPromise()
       .then(user => {
-        console.log(user);
         this.user = user;
         return user;
       })
