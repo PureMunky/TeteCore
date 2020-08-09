@@ -23,6 +23,11 @@ namespace Tete.Api.Contexts
     public virtual DbSet<Tete.Models.Users.Profile> UserProfiles { get; set; }
     public virtual DbSet<Tete.Models.Authentication.AccessRole> AccessRoles { get; set; }
 
+    // Topics
+    public virtual DbSet<Tete.Models.Content.Topic> Topics { get; set; }
+    public virtual DbSet<Tete.Models.Relationships.Mentorship> Mentorships { get; set; }
+    public virtual DbSet<Tete.Models.Relationships.UserTopic> UserTopics { get; set; }
+
     public MainContext(DbContextOptions options) : base(options)
     {
       Console.WriteLine("Initializing MainContext");

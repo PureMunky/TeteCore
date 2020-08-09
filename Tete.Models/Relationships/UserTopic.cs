@@ -1,36 +1,35 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tete.Models.Relationships
 {
 
-  /// <summary>
-  /// Defines the relationship between a user and a topic.
-  /// </summary>
   public class UserTopic
   {
 
-    /// <summary>
-    /// The user Id that this relationship describes.
-    /// </summary>
-    /// <value></value>
-    public Guid UserId {get; set;}
+    [Key]
+    public Guid UserTopicID { get; set; }
 
-    /// <summary>
-    /// The topic Id that this relationship describes.
-    /// </summary>
-    /// <value></value>
-    public Guid TopicId {get; set;}
+    [Required]
+    public Guid UserId { get; set; }
 
-    /// <summary>
-    /// The level of knowledge that the user has for the topic.
-    /// </summary>
-    /// <value></value>
-    public TopicStatus Status {get; set;}
 
-    /// <summary>
-    /// The date that the user initially enrolled in the topic.
-    /// </summary>
-    /// <value></value>
-    public DateTime StartDate {get; set;}
+    [Required]
+    public Guid TopicId { get; set; }
+
+    [Required]
+    public TopicStatus Status { get; set; }
+
+    public DateTime CreatedDate { get; set; }
+
+    public UserTopic(Guid UserId, Guid TopicId, TopicStatus Status)
+    {
+      this.UserTopicID = Guid.NewGuid();
+      this.UserId = UserId;
+      this.TopicId = TopicId;
+      this.Status = Status;
+      this.CreatedDate = DateTime.UtcNow;
+    }
   }
+
 }

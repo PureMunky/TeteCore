@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tete.Api.Contexts;
 
 namespace Tete.Api.Migrations
 {
     [DbContext(typeof(MainContext))]
-    partial class MainContextModelSnapshot : ModelSnapshot
+    [Migration("20200727194309_createTopics")]
+    partial class createTopics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -223,48 +225,6 @@ namespace Tete.Api.Migrations
                     b.HasKey("LogId");
 
                     b.ToTable("Logs");
-                });
-
-            modelBuilder.Entity("Tete.Models.Relationships.Mentorship", b =>
-                {
-                    b.Property<Guid>("MentorshipId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<bool>("Active");
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<DateTime>("EndDate");
-
-                    b.Property<Guid>("LearnerUserId");
-
-                    b.Property<Guid>("MentorUserId");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<Guid>("TopicId");
-
-                    b.HasKey("MentorshipId");
-
-                    b.ToTable("Mentorships");
-                });
-
-            modelBuilder.Entity("Tete.Models.Relationships.UserTopic", b =>
-                {
-                    b.Property<Guid>("UserTopicID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedDate");
-
-                    b.Property<int>("Status");
-
-                    b.Property<Guid>("TopicId");
-
-                    b.Property<Guid>("UserId");
-
-                    b.HasKey("UserTopicID");
-
-                    b.ToTable("UserTopics");
                 });
 
             modelBuilder.Entity("Tete.Models.Users.Profile", b =>
