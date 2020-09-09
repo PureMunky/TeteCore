@@ -28,6 +28,7 @@ namespace Tete.Api.Controllers
       var langService = new Services.Localization.UserLanguageService(Context, CurrentUser);
       langService.SaveUserLanguages(value.UserId, value.Languages);
 
+      LogService.Write("Saved profile", value.UserId.ToString());
       return new Response<UserVM>(value);
     }
 
@@ -38,5 +39,6 @@ namespace Tete.Api.Controllers
 
       return new Response<UserVM>(service.Search(searchText));
     }
+
   }
 }
