@@ -8,6 +8,9 @@ docker tag tete-web-img:latest puremunky/tete-web:build-$TRAVIS_BUILD_NUMBER
 
 docker push puremunky/tete-web:build-$TRAVIS_BUILD_NUMBER
 
+curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+chmod u+x ./kubectl
+
 envsubst <./deployments/do-dev.yml >./deployments/do-dev.yml.out
 mv ./deployments/do-dev.yml.out ./deployments/do-dev.yml
 kubectl --kubeconfig=/dev/null --token=$KUBERNETES_TOKEN --server=$KUBERNETES_SERVER --certificate-authority=cert.crt apply -f ./deployments/do-dev.yml
