@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Tete.Models.Content
 {
@@ -7,31 +9,33 @@ namespace Tete.Models.Content
   /// </summary>
   public class Topic
   {
+    public Guid TopicId { get; set; }
 
-    /// <summary>
-    /// The Name of the topic.
-    /// </summary>
-    /// <value></value>
+    [Required]
     public string Name { get; set; }
 
-    /// <summary>
-    /// The description of the type of information covered by
-    /// the topic.
-    /// </summary>
-    /// <value></value>
     public string Description { get; set; }
 
-    /// <summary>
-    /// Determines if the topic is able to have deacons.
-    /// </summary>
-    /// <value></value>
     public bool Elligible { get; set; }
 
-    /// <summary>
-    /// When the topic was created.
-    /// </summary>
-    /// <value></value>
     public DateTime Created { get; set; }
 
+    [Required]
+    public Guid CreatedBy { get; set; }
+
+    public Topic()
+    {
+      FillData("", "", DateTime.UtcNow);
+    }
+
+    private void FillData(string Name, string Description, DateTime Created)
+    {
+      this.TopicId = Guid.NewGuid();
+      this.Name = Name;
+      this.Description = Description;
+      this.Elligible = false;
+      this.Created = Created;
+    }
   }
+
 }

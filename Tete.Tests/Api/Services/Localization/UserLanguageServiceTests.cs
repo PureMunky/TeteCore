@@ -8,14 +8,17 @@ using Tete.Tests.Setup;
 
 namespace Tete.Tests.Api.Services.Localization
 {
-  public class UserLanuageServiceTests : LocalizationTestBase
+  public class UserLanuageServiceTests : TestBase
   {
     private UserLanguageService userLanguageService;
 
     [SetUp]
     public void SetupTests()
     {
-      userLanguageService = new UserLanguageService(mockContext.Object);
+      userLanguageService = new UserLanguageService(mockContext.Object, new Tete.Models.Authentication.UserVM()
+      {
+        Roles = { "Admin" }
+      });
     }
 
     [Test]
@@ -27,10 +30,29 @@ namespace Tete.Tests.Api.Services.Localization
     [Test]
     public void GetUserLanguagesTest()
     {
-      List<UserLanguage> userLanguages = this.userLanguageService.GetUserLanguages(userId);
+      List<UserLanguage> userLanguages = this.userLanguageService.GetUserLanguages(existingUserId);
 
       Assert.AreEqual(1, userLanguages.Count);
-      Assert.AreEqual(2, userLanguages[0].Language.Elements.Count);
+    }
+
+    [Test]
+    public void SaveUserLanguagesTest()
+    {
+      var langs = new List<UserLanguage>(){
+        new UserLanguage() {
+          UserId = existingUserId,
+          LanguageId = englishId
+        },
+        new UserLanguage() {
+          UserId = existingUserId,
+          LanguageId = spanishId,
+          Read = true
+        }
+      };
+
+      this.userLanguageService.SaveUserLanguages(existingUserId, langs);
+
+      mockContext.Verify(c => c.UserLanguages.Add(It.IsAny<UserLanguage>()), Times.AtLeastOnce);
     }
   }
 }

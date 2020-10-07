@@ -12,36 +12,25 @@ namespace Tete.Api.Controllers
 {
   [Route("V1/[controller]/[action]")]
   [ApiController]
-  public class ProfileController : ControllerBase
+  public class ProfileController : ControllerRoot
   {
 
-    private Api.Services.Logging.LogService logService;
 
-    private Contexts.MainContext context;
-
-    public ProfileController(Contexts.MainContext mainContext)
+    public ProfileController(Contexts.MainContext mainContext) : base(mainContext)
     {
-      this.context = mainContext;
-      this.logService = new Services.Logging.LogService(mainContext, "API");
     }
 
     // POST api/values
     [HttpPost]
     public Response<Profile> Post([FromBody] Profile value)
     {
-      var service = new Services.Users.ProfileService(this.context, UserHelper.CurrentUser(HttpContext, this.context));
+      var service = new Services.Users.ProfileService(Context, CurrentUser);
       service.SaveProfile(value);
+
+      LogService.Write("Saved profile", String.Format("User:{0}", value.UserId));
 
       return new Response<Profile>(value);
     }
-
-    // [HttpPut]
-    // public Response<Language> Update([FromBody] Language language)
-    // {
-    //   var service = new Services.Localization.LanguageService(this.context, UserHelper.CurrentUser(HttpContext, this.context));
-
-    //   return new Response<Language>(service.Update(language));
-    // }
 
   }
 }

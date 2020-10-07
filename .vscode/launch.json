@@ -9,7 +9,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "build-web",
-      "program": "${workspaceFolder}/Tete.Web/bin/Debug/netcoreapp2.2/Tete.Web.dll",
+      "program": "${workspaceFolder}/Tete.Web/bin/Debug/netcoreapp3.1/Tete.Web.dll",
       "args": [],
       "cwd": "${workspaceFolder}/Tete.Web",
       "stopAtEntry": false,
@@ -19,7 +19,7 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5001"
+        "ASPNETCORE_URLS": "https://localhost:443;http://localhost:80"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"
@@ -30,7 +30,7 @@
       "type": "coreclr",
       "request": "launch",
       "preLaunchTask": "buildDockerDb",
-      "program": "${workspaceFolder}/Tete.Web/bin/Debug/netcoreapp2.2/Tete.Web.dll",
+      "program": "${workspaceFolder}/Tete.Web/bin/Debug/netcoreapp3.1/Tete.Web.dll",
       "args": [],
       "cwd": "${workspaceFolder}/Tete.Web",
       "stopAtEntry": false,
@@ -40,7 +40,7 @@
       },
       "env": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "http://localhost:5001"
+        "ASPNETCORE_URLS": "https://localhost:443;http://localhost:80"
       },
       "sourceFileMap": {
         "/Views": "${workspaceFolder}/Views"

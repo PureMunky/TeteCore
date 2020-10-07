@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using System;
+using LettuceEncrypt;
 
 namespace Tete.Web
 {
@@ -21,8 +22,34 @@ namespace Tete.Web
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+      services.AddMvc(setup =>
+      {
+        setup.EnableEndpointRouting = false;
+      });
       services.AddDbContext<Tete.Api.Contexts.MainContext>(options => options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+
+      services.AddHttpsRedirection(opts =>
+      {
+        opts.RedirectStatusCode = 308;
+        opts.HttpsPort = 443;
+      });
+
+      services.AddHttpsRedirection(opts =>
+      {
+        opts.RedirectStatusCode = 307;
+        opts.HttpsPort = 443;
+      });
+
+      services.AddHsts(opts =>
+      {
+        opts.Preload = true;
+        opts.IncludeSubDomains = true;
+        opts.MaxAge = TimeSpan.FromHours(2);
+      });
+
+      services
+        .AddLettuceEncrypt()
+        .PersistDataToDirectory(new System.IO.DirectoryInfo("/var/opt/ssl"), Environment.GetEnvironmentVariable("Certificate_Password"));
 
       // In production, the Angular files will be served from this directory
       services.AddSpaStaticFiles(configuration =>
@@ -32,10 +59,11 @@ namespace Tete.Web
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
       if (env.IsDevelopment())
       {
+        // app.UseExceptionHandler("/Error");
         app.UseDeveloperExceptionPage();
       }
       else
@@ -45,7 +73,7 @@ namespace Tete.Web
         app.UseHsts();
       }
 
-      // app.UseHttpsRedirection();
+      app.UseHttpsRedirection();
       app.UseStaticFiles();
       app.UseSpaStaticFiles();
 
