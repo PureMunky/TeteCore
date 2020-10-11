@@ -1,4 +1,5 @@
 echo "Time: $(date -Iseconds)" > ./Tete.Web/wwwroot/build.txt
+<<<<<<< HEAD
 
 if [ -z "$TRAVIS_BUILD_NUMBER" ]
 then
@@ -14,3 +15,7 @@ then
 else
   echo "Branch: $TRAVIS_BRANCH" >> ./Tete.Web/wwwroot/build.txt
 fi
+=======
+echo "Build: $TRAVIS_BUILD_NUMBER" >> ./Tete.Web/wwwroot/build.txt
+echo "Branch: $TRAVIS_BRANCH" >> ./Tete.Web/wwwroot/build.txt
+>>>>>>> Fixed build error.
