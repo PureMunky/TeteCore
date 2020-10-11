@@ -45,6 +45,14 @@
         "kind": "test",
         "isDefault": true
       }
+    },
+    {
+      "label": "runInContainers",
+      "dependsOn": [
+        "build-web"
+      ],
+      "type": "shell",
+      "command": "./run-docker.sh"
     }
   ]
 }
