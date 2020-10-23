@@ -36,10 +36,7 @@ export class DashboardAdminComponent {
 
 interface DashboardStatistics {
   totalUsers: number,
-<<<<<<< HEAD
-=======
   registeredUsers: number,
->>>>>>> develop
   activeUsers: number,
   totalTopics: number,
   activeTopics: number,
