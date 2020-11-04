@@ -14,7 +14,11 @@
   </div>
 
   <div class="container">
-    <pre *ngIf="bannerMessage" class="alert alert-primary">{{bannerMessage}}</pre>
+    <div *ngIf="banner && banner.message"
+      [class]="(banner.type ? 'alert alert-' + banner.type : 'alert alert-primary')">
+      <pre style="margin: 0px;">{{banner.message}}</pre>
+      <a *ngIf="banner.link.display" [href]="banner.link.url" target="_blank">{{banner.link.name}}</a>
+    </div>
     <div *ngIf="!currentUser.userName && currentUser.loaded" class="alert alert-info">
       You're currently not logged in and using a Guest profile.<br />
       Go to <a routerLink="/settings">Settings</a> to log in or register your account.

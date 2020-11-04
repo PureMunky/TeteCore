@@ -13,7 +13,15 @@ import { UserService } from "./services/user.service";
 export class AppComponent {
   public currentUser: User = new User(null);
   public title = "app";
-  public bannerMessage: string = ''
+  public banner = {
+    message: '',
+    type: '',
+    link: {
+      display: false,
+      url: '',
+      name: ''
+    }
+  };
 
   public error: Error = {
     message: '',
@@ -29,8 +37,20 @@ export class AppComponent {
     errorService.Register(message => this.errorHandler(message));
     initService.Register(() => {
       this.currentUser = userService.CurrentUser();
-      this.bannerMessage = this.settingService.Setting('system.message');
+      this.populateBanner();
     })
+  }
+
+  private populateBanner() {
+    this.banner = {
+      message: this.settingService.Setting('system.message'),
+      type: this.settingService.Setting('system.message.type'),
+      link: {
+        display: !!this.settingService.Setting('system.message.link.display'),
+        url: this.settingService.Setting('system.message.link.url'),
+        name: this.settingService.Setting('system.message.link.name')
+      }
+    };
   }
 
   public errorHandler(message: string) {
