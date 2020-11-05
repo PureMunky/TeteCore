@@ -1,17 +1,20 @@
 <h1>{{user.displayName}} Profile</h1>
 <div class="alert alert-primary" *ngIf="!user.userName">
-  This is a guest profile.<br />
-  Register or login to an existing account <a routerLink="/settings">here</a>.<br />
+  Register or log in to an existing account <a routerLink="/settings">here</a>.<br />
   If you register for a <strong>free</strong> full account you'll be able to:
   <ul>
     <li>Create new topics</li>
+    <li>Request a mentor</li>
     <li>Register as a mentor</li>
-    <li>Log in from multiple devices</li>
   </ul>
 </div>
 <span *ngIf="user.userName">Username: {{user.userName}}</span>
 
 <div *ngIf="working.editing">
+  <div *ngIf="user.displayName == 'Guest'" class="alert alert-info">
+    Change your name to something that suits you better, you're more than a guest now!<br />
+    While you're at it why don't you put some ice-breaker details for your about.
+  </div>
   <div *ngIf="user.userName">
     <div>
       Go to <a routerLink="/settings">Settings</a> to change your username or password.

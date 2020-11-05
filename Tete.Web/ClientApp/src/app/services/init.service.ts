@@ -16,16 +16,17 @@ export class InitService {
   }
 
   public Load() {
-    let inits = [
-      this.userService.Load(),
-      this.settingService.Load()
-    ];
+    return this.userService.Load().then(() => {
+      let inits = [
+        this.settingService.Load()
+      ];
 
-    return Promise.all(inits).then(() => {
-      this.loaded = true;
-      for (let i = 0; i < this.functions.length; i++) {
-        this.functions[i]();
-      }
+      return Promise.all(inits).then(() => {
+        this.loaded = true;
+        for (let i = 0; i < this.functions.length; i++) {
+          this.functions[i]();
+        }
+      });
     });
   }
 
