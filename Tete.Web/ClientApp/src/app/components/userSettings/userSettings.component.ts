@@ -31,21 +31,21 @@ export class UserSettingsComponent {
   public resetPassword() {
     this.apiService
       .post('/Login/ResetPassword', { password: this.working.registration.password })
-      .then(r => this.processRegistrationResponse(r[0]));
+      .then(r => this.processRegistrationResponse(r[0], '/'));
   }
 
   public updateUserName() {
     this.apiService
       .post('/Login/UpdateUserName', { userName: this.working.registration.userName })
-      .then(r => this.processRegistrationResponse(r[0]));
+      .then(r => this.processRegistrationResponse(r[0], '/'));
   }
 
   public registerNewLogin() {
-    this.apiService.post('/Login/RegisterNewLogin', this.working.registration).then(r => this.processRegistrationResponse(r[0]));
+    this.apiService.post('/Login/RegisterNewLogin', this.working.registration).then(r => this.processRegistrationResponse(r[0], '/profile'));
   }
 
   public login() {
-    this.apiService.post('/Login/Login', this.working.registration).then(r => this.processRegistrationResponse(r[0]));
+    this.apiService.post('/Login/Login', this.working.registration).then(r => this.processRegistrationResponse(r[0], '/'));
   }
 
   public finalizeDelete() {
@@ -54,11 +54,11 @@ export class UserSettingsComponent {
     });
   }
 
-  private async processRegistrationResponse(response) {
+  private async processRegistrationResponse(response, navigation: string) {
     {
       if (response.successful) {
         await this.initService.Load();
-        this.router.navigate(['/'])
+        this.router.navigate([navigation]);
       } else {
         this.working.responseMessages = response.messages;
       }

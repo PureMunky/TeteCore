@@ -20,7 +20,8 @@
       <a *ngIf="banner.link.display" [href]="banner.link.url" target="_blank">{{banner.link.name}}</a>
     </div>
     <div *ngIf="!currentUser.userName && currentUser.loaded" class="alert alert-info">
-      You're currently not logged in and using a Guest profile.<br />
+      You're currently not logged in and using a <a routerLink="/profile">Guest</a> profile which is limited to what it
+      can do.<br />
       Go to <a routerLink="/settings">Settings</a> to log in or register your account.
     </div>
     <div *ngIf="currentUser.block" class="alert alert-danger">

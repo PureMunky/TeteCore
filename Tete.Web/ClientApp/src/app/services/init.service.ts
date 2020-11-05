@@ -16,7 +16,7 @@ export class InitService {
   }
 
   public Load() {
-    this.userService.Load().then(() => {
+    return this.userService.Load().then(() => {
       let inits = [
         this.settingService.Load()
       ];
