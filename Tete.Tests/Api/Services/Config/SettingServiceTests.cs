@@ -57,5 +57,12 @@ namespace Tete.Tests.Api.Services.Config
 
       mockContext.Verify(m => m.Settings.Update(It.IsAny<Setting>()), Times.Once);
     }
+
+    [Test]
+    public void DeleteSettingTest()
+    {
+      this.service.Delete(settingKey);
+      mockContext.Verify(m => m.Settings.Remove(It.IsAny<Setting>()), Times.Once);
+    }
   }
 }

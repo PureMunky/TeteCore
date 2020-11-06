@@ -32,6 +32,7 @@ namespace Tete.Api.Services.Config
     {
       if (this.Actor.Roles.Contains("Admin"))
       {
+        setting.Key = setting.Key.Trim();
         var dbSetting = this.mainContext.Settings.Where(s => s.Key == setting.Key).FirstOrDefault();
 
         if (dbSetting != null)
@@ -54,6 +55,20 @@ namespace Tete.Api.Services.Config
         }
 
         this.mainContext.SaveChanges();
+      }
+    }
+
+    public void Delete(string key)
+    {
+      if (this.Actor.Roles.Contains("Admin"))
+      {
+        var dbSetting = this.mainContext.Settings.Where(s => s.Key == key).FirstOrDefault();
+
+        if (dbSetting != null)
+        {
+          this.mainContext.Settings.Remove(dbSetting);
+          this.mainContext.SaveChanges();
+        }
       }
     }
   }
