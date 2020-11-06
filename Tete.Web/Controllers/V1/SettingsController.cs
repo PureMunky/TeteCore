@@ -27,6 +27,17 @@ namespace Tete.Api.Controllers
       return new Response<bool>(true);
     }
 
+    [HttpPost]
+    public Response<bool> Delete([FromBody] Setting setting)
+    {
+      var service = new Services.Config.SettingService(Context, CurrentAdmin);
+
+      LogService.Write("Deleted Config", string.Format("{0}:{1}", setting.Key, setting.Value));
+      service.Delete(setting.Key);
+
+      return new Response<bool>(true);
+    }
+
     [HttpGet]
     public Response<KeyValuePair<string, string>> Get()
     {
