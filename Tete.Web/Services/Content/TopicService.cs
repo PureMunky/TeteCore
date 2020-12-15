@@ -296,6 +296,17 @@ namespace Tete.Api.Services.Content
       }
     }
 
+    public void MakeElligible(Guid TopicId)
+    {
+      var dbTopic = this.mainContext.Topics.Where(t => t.TopicId == TopicId).FirstOrDefault();
+      if (dbTopic != null)
+      {
+        dbTopic.Elligible = true;
+        this.mainContext.Topics.Update(dbTopic);
+        this.mainContext.SaveChanges();
+      }
+    }
+
     private void FillData(MainContext mainContext, UserVM actor)
     {
       this.mainContext = mainContext;

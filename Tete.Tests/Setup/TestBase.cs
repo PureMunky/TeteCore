@@ -44,6 +44,7 @@ namespace Tete.Tests.Setup
 
     public Guid linkId = Guid.NewGuid();
     public Guid existingTopicId = Guid.NewGuid();
+    public Guid largeTopicId = Guid.NewGuid();
 
     public string keyword = "existingkeyword";
     public Guid englishId = Guid.NewGuid();
@@ -115,11 +116,20 @@ namespace Tete.Tests.Setup
         }
       };
 
-      IQueryable<User> users = new List<User> {
+      var users = new List<User> {
         existingUser,
         adminUser,
         newUser
-      }.AsQueryable();
+      };
+
+      for (int i = 0; i < 30; i++)
+      {
+        users.Add(new User()
+        {
+          UserName = "dummy" + i.ToString(),
+          DisplayName = "Dummy " + i.ToString()
+        });
+      }
 
       IQueryable<UserLanguage> userLanguages = new List<UserLanguage> {
         userLanguage,
@@ -169,6 +179,11 @@ namespace Tete.Tests.Setup
         new Topic(){
           TopicId = existingTopicId,
           Name = "Existing Topic Name"
+        },
+        new Topic(){
+          TopicId = largeTopicId,
+          Name = "Large Establised Topic",
+          Description = "Lots of things going on in this topic."
         }
       };
 
@@ -204,6 +219,14 @@ namespace Tete.Tests.Setup
       {
         new UserTopic(adminUser.Id, existingTopicId, TopicStatus.Mentor)
       };
+
+      foreach (User u in users)
+      {
+        if (u.UserName != null && u.UserName.StartsWith("dummy"))
+        {
+          userTopics.Add(new UserTopic(adminUser.Id, largeTopicId, TopicStatus.Mentor));
+        }
+      }
 
       var mentorships = new List<Mentorship>()
       {

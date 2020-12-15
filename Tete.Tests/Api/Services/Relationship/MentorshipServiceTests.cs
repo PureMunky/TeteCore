@@ -51,6 +51,13 @@ namespace Tete.Tests.Api.Services.Relationship
     }
 
     [Test]
+    public void RegisterMentorNewElligible()
+    {
+      this.service.RegisterMentor(existingUserId, largeTopicId);
+      mockContext.Verify(m => m.Topics.Update(It.IsAny<Tete.Models.Content.Topic>()), Times.Once);
+    }
+
+    [Test]
     public void ClaimNextMentorshipTest()
     {
       var mentorship = this.service.ClaimNextMentorship(adminUser.Id, existingTopicId);

@@ -1,0 +1,16 @@
+<!-- Assessor Section -->
+<div>
+  <div class="form-group">
+    <label for="assessorComments">Public Comments about the assessment</label>
+    <textarea id="assessorComments" class="form-control" [(ngModel)]="working.assessorComments"></textarea>
+    <small class="form-text text-muted">What the learner could have done better and what they did well.</small>
+  </div>
+
+  <label for="learnerRating">Score</label> {{working.assessorRating * 100}}%
+  <input id="learnerRating" class="form-control-range" type="range" min="0" max="1" step="0.05"
+    [(ngModel)]="working.assessorRating" />
+
+  <span class="form-text">Final Results</span>
+  <button class="btn btn-success">Pass</button>
+  <button class="btn btn-danger">Fail</button>
+</div>

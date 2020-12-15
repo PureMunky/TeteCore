@@ -41,9 +41,22 @@ namespace Tete.Api.Services.Relationships
     public void RegisterMentor(Guid UserId, Guid TopicId)
     {
       var topic = TopicService.GetTopic(TopicId);
-      if (topic != null && (!topic.Elligible || this.Actor.Roles.Contains("Admin")))
+      if (topic != null)
       {
-        SetUserTopic(UserId, TopicId, TopicStatus.Mentor);
+        if (!topic.Elligible || this.Actor.Roles.Contains("Admin"))
+        {
+          SetUserTopic(UserId, TopicId, TopicStatus.Mentor);
+        }
+
+        // TODO: Test elligible flip after 30 mentors.
+        if (!topic.Elligible)
+        {
+          var dbMentorCount = this.mainContext.UserTopics.Where(ut => ut.TopicId == TopicId && ut.Status == TopicStatus.Mentor).Count();
+          if (dbMentorCount >= 30)
+          {
+            TopicService.MakeElligible(topic.TopicId);
+          }
+        }
       }
     }
 

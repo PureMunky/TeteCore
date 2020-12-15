@@ -84,6 +84,7 @@
       <button class="btn btn-secondary" (click)="learn()">Request a Mentor</button>
       <button class="btn btn-secondary" (click)="teach()" *ngIf="!currentTopic.elligible || adminUser">Register as a
         Mentor</button>
+      <button class="btn btn-secondary" (click)="assessment()">Request an Assessment</button>
     </div>
 
     <div *ngIf="currentTopic.userTopic &&  currentTopic.userTopic.status == 4">

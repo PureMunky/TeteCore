@@ -28,6 +28,7 @@ namespace Tete.Api.Contexts
 
     // Topics
     public virtual DbSet<Tete.Models.Content.Topic> Topics { get; set; }
+    public virtual DbSet<Tete.Models.Relationships.Assessment> Assessments { get; set; }
     public virtual DbSet<Tete.Models.Relationships.Mentorship> Mentorships { get; set; }
     public virtual DbSet<Tete.Models.Relationships.UserTopic> UserTopics { get; set; }
     public virtual DbSet<Tete.Models.Content.TopicLink> TopicLinks { get; set; }

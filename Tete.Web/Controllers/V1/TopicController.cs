@@ -53,6 +53,17 @@ namespace Tete.Api.Controllers
     }
 
     [HttpPost]
+    public Response<bool> RequestAssessment(Guid UserId, Guid TopicId)
+    {
+      var service = new Services.Relationships.AssessmentService(Context, CurrentUser);
+      service.CreateAssessment(UserId, TopicId);
+
+      LogService.Write("Requested an Assessment", String.Format("User:{0};Topic:{1}", UserId.ToString(), TopicId.ToString()));
+
+      return new Response<bool>(true);
+    }
+
+    [HttpPost]
     public Response<MentorshipVM> ClaimNextMentorship(Guid UserId, Guid TopicId)
     {
       var service = new Services.Relationships.MentorshipService(Context, CurrentUser);

@@ -109,6 +109,11 @@ export class TopicComponent {
     this.topicService.RegisterMentor(this.currentUser.userId, this.currentTopic.topicId).then(() => this.reload());
   }
 
+  // TODO: Test assessment flow.
+  public assessment() {
+    this.topicService.RequestAssessment(this.currentUser.userId, this.currentTopic.topicId).then(() => this.reload());
+  }
+
   public claimNextMentorship() {
     // TODO: Figure out notifications/notify the learner that they've been picked up.
     this.topicService.ClaimNextMentorship(this.currentUser.userId, this.currentTopic.topicId).then(m => {

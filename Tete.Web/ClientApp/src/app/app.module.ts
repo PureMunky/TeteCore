@@ -27,6 +27,7 @@ import { SettingAdminComponent } from "./components/settingAdmin/settingAdmin.co
 import { UserSettingsComponent } from "./components/userSettings/userSettings.component";
 import { TosComponent } from "./components/legal/tos.component";
 import { PrivacyComponent } from "./components/legal/privacy.component";
+import { AssessmentComponent } from "./components/mentorship/assessment.component";
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { PrivacyComponent } from "./components/legal/privacy.component";
     SettingAdminComponent,
     UserSettingsComponent,
     TosComponent,
-    PrivacyComponent
+    PrivacyComponent,
+    AssessmentComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),
@@ -78,6 +80,7 @@ import { PrivacyComponent } from "./components/legal/privacy.component";
       { path: "topic/create/:name", component: TopicComponent },
       { path: "topic/:topicId", component: TopicComponent },
       { path: "mentorship/:mentorshipId", component: MentorshipComponent },
+      { path: "assessment/:assessmentId", component: AssessmentComponent },
       { path: "support", component: SupportComponent },
       { path: "tos", component: TosComponent },
       { path: "privacy", component: PrivacyComponent }
