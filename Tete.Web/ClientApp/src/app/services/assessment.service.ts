@@ -7,6 +7,7 @@ import { Assessment } from "../models/assessment";
 })
 export class AssessmentService {
   private UrlGetAssessment = (assessmentId: string) => `/V1/Assessment/GetAssessment?AssessmentId=${assessmentId}`;
+  private UrlGetUserAssessments = (userId: string) => `/V1/Assessment/GetUserAssessments?UserId=${userId}`;
   private UrlSetContactDetails = "/V1/Mentorship/SetContactDetails";
 
   constructor(private apiService: ApiService) {
@@ -17,6 +18,10 @@ export class AssessmentService {
     return this.apiService.get(this.UrlGetAssessment(assessmentId), 100000).then(a => {
       return a[0];
     });
+  }
+
+  public GetUserAssessments(userId: string) {
+    return this.apiService.get(this.UrlGetUserAssessments(userId), 100000).then(a => a);
   }
 
   public SetContactDetails(mentorshipId: string, userId: string, contactDetails: string) {
