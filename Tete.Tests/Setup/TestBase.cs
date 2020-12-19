@@ -283,6 +283,9 @@ namespace Tete.Tests.Setup
       mockContext.Setup(c => c.Logins)
         .Returns(MockContext.MockDBSet<Login>().Object);
 
+      mockContext.Setup(c => c.Assessments)
+        .Returns(MockContext.MockDBSet<Assessment>().Object);
+
     }
 
   }

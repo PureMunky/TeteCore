@@ -40,5 +40,13 @@ namespace Tete.Api.Services
         return new Localization.UserLanguageService(this.mainContext, this.Actor);
       }
     }
+
+    protected Relationships.AssessmentService AssessmentService
+    {
+      get
+      {
+        return new Relationships.AssessmentService(this.mainContext, this.Actor);
+      }
+    }
   }
 }

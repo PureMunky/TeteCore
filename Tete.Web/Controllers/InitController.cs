@@ -169,9 +169,9 @@ namespace Tete.Api.Controllers
         this.mainContext.Migrate();
         response = "Success";
       }
-      catch (Exception)
+      catch (Exception e)
       {
-        response = "Error";
+        response = e.Message;
       }
 
       return response;

@@ -33,7 +33,6 @@ namespace Tete.Models.Relationships
 
     // An assessment without and AssessorUserId is a request for an assessment.
     public Guid AssessorUserId { get; set; }
-    public User AssessorUser { get; set; }
     public string AssessorDetails { get; set; }
 
     // Public comments about the assessment results.

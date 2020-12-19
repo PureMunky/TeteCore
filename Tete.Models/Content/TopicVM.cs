@@ -30,6 +30,7 @@ namespace Tete.Models.Content
     public List<Keyword> Keywords { get; set; }
 
     public List<MentorshipVM> UserMentorships { get; set; }
+    public List<AssessmentVM> UserAssessments { get; set; }
 
     public string ShortDescription
     {

@@ -65,6 +65,23 @@ namespace Tete.Api.Services.Relationships
       return rtnAssessment;
     }
 
+    public List<AssessmentVM> GetUserAssessments(Guid UserId, Guid TopicId = new Guid())
+    {
+      var rtnList = new List<AssessmentVM>();
+
+      if (UserId == this.Actor.UserId || this.Actor.Roles.Contains("Admin"))
+      {
+        var dbAssesments = this.mainContext.Assessments.Where(a => a.Active && (a.TopicId == TopicId || TopicId == Guid.Empty) && (a.LearnerUserId == UserId || a.AssessorUserId == UserId)).ToList();
+
+        foreach (Assessment a in dbAssesments)
+        {
+          rtnList.Add(GetAssessmentVM(a));
+        }
+
+      }
+
+      return rtnList;
+    }
     #endregion
 
 
