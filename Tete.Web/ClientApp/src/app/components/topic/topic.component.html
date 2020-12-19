@@ -67,6 +67,12 @@
     You have an existing mentorship for this topic.
     Click <a [routerLink]="['/mentorship', currentTopic.userMentorships[0].mentorshipId]">here</a> to open it.
   </div>
+  <div class="alert alert-info" *ngIf="currentTopic.userAssessments.length > 0">
+    Open Assessments:
+    <div *ngFor="let assessment of currentTopic.userAssessments">
+      <a [routerLink]="['/assessment', assessment.assessmentId]">Assessment</a>
+    </div>
+  </div>
 
   <div *ngIf="currentTopic.links.length > 0">
     <div *ngFor="let link of currentTopic.links">

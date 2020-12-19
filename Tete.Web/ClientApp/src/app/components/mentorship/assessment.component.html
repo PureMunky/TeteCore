@@ -1,5 +1,5 @@
 <!-- Assessor Section -->
-<div>
+<div *ngIf="isAssessor">
   <div class="form-group">
     <label for="assessorComments">Public Comments about the assessment</label>
     <textarea id="assessorComments" class="form-control" [(ngModel)]="working.assessorComments"></textarea>
@@ -13,4 +13,8 @@
   <span class="form-text">Final Results</span>
   <button class="btn btn-success">Pass</button>
   <button class="btn btn-danger">Fail</button>
+</div>
+
+<div *ngIf="!isAssessor">
+  Learner
 </div>
