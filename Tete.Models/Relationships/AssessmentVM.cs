@@ -21,6 +21,7 @@ namespace Tete.Models.Relationships
     public string AssessorDetails { get; set; }
     public string AssessorComments { get; set; }
     public bool AssessmentResult { get; set; }
+    public bool HasAssessor { get; set; }
     public double Score { get; set; }
     public DateTime AssignedDate { get; set; }
     public DateTime CompletedDate { get; set; }
@@ -42,6 +43,7 @@ namespace Tete.Models.Relationships
       this.Active = assessment.Active;
       this.CreatedDate = assessment.CreatedDate;
       this.AssessorComments = assessment.AssessorComments;
+      this.HasAssessor = false;
     }
   }
 }

@@ -107,6 +107,7 @@ namespace Tete.Api.Services.Relationships
         if (dbAssessor != null)
         {
           rtnAssessment.Assessor = new UserVM(dbAssessor);
+          rtnAssessment.HasAssessor = true;
         }
         else
         {

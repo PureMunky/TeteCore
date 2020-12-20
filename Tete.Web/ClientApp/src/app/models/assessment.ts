@@ -14,6 +14,7 @@ export class Assessment {
   public assessorDetails: string;
   public assessorComments: string;
   public assessmentResult: boolean;
+  public hasAssessor: boolean;
   public score: number;
   public assignedDate: Date;
   public completedDate: Date;

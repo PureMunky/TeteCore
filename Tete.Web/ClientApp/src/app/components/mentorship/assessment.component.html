@@ -1,3 +1,18 @@
+<!-- TODO: normalize a relationship type that assessment and mentorship share. -->
+<!-- TODO: cetnralize this with the mentorship. -->
+<h2>{{currentAssessment.topic.name}}</h2>
+<div style="margin-left: 10px;">
+  <h6>as {{currentAssessment.learnerUserId == currentUser.userId ? 'a Learner' : 'an Assessor'}}</h6>
+  <h6 *ngIf="working.otherPerson">
+    with <teteProfileLink [user]="working.otherPerson" style="font-weight: bold;"></teteProfileLink>
+  </h6>
+</div>
+
+<!-- Contact Details -->
+<div>
+
+</div>
+
 <!-- Assessor Section -->
 <div *ngIf="isAssessor">
   <div class="form-group">
@@ -15,6 +30,7 @@
   <button class="btn btn-danger">Fail</button>
 </div>
 
+<!-- Learner Section -->
 <div *ngIf="!isAssessor">
   Learner
 </div>

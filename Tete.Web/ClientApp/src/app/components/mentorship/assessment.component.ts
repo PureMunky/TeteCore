@@ -17,7 +17,8 @@ export class AssessmentComponent {
 
   public working = {
     assessorComments: '',
-    assessorRating: 0
+    assessorRating: 0,
+    otherPerson: null
   };
 
   constructor(private route: ActivatedRoute,
@@ -38,6 +39,11 @@ export class AssessmentComponent {
     this.assessmentService.GetAssessment(assessmentId).then(a => {
       this.currentAssessment = a;
       this.isAssessor = (this.currentUser.userId == this.currentAssessment.assessorUserId);
+      if (this.currentAssessment.learnerUserId == this.currentUser.userId && this.currentAssessment.assessor) {
+        this.working.otherPerson = this.currentAssessment.assessor;
+      } else if (this.currentAssessment.assessorUserId == this.currentUser.userId) {
+        this.working.otherPerson = this.currentAssessment.learner;
+      }
     });
   }
 }
