@@ -67,6 +67,7 @@
     You have an existing mentorship for this topic.
     Click <a [routerLink]="['/mentorship', currentTopic.userMentorships[0].mentorshipId]">here</a> to open it.
   </div>
+  <!-- FIXME: Console error on loading. -->
   <div class="alert alert-info" *ngIf="currentTopic.userAssessments.length > 0">
     Open Assessments:
     <div *ngFor="let assessment of currentTopic.userAssessments">

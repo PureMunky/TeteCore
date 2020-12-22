@@ -1,36 +1,33 @@
-<!-- TODO: normalize a relationship type that assessment and mentorship share. -->
-<!-- TODO: cetnralize this with the mentorship. -->
-<h2>{{currentAssessment.topic.name}}</h2>
-<div style="margin-left: 10px;">
-  <h6>as {{currentAssessment.learnerUserId == currentUser.userId ? 'a Learner' : 'an Assessor'}}</h6>
-  <h6 *ngIf="working.otherPerson">
-    with <teteProfileLink [user]="working.otherPerson" style="font-weight: bold;"></teteProfileLink>
-  </h6>
-</div>
+<div *ngIf="!working.loading">
 
-<!-- Contact Details -->
-<div>
+  <!-- TODO: normalize a relationship type that assessment and mentorship share. -->
+  <!-- TODO: cetnralize this with the mentorship. -->
+  <teteTopicHeader [topic]="currentAssessment.topic" [currentUser]="currentUser" [learner]="currentAssessment.learner"
+    [mentor]="currentAssessment.assessor" [mentorTitle]="'as Assessor'"></teteTopicHeader>
+  <!-- Contact Details -->
+  <div>
 
-</div>
-
-<!-- Assessor Section -->
-<div *ngIf="isAssessor">
-  <div class="form-group">
-    <label for="assessorComments">Public Comments about the assessment</label>
-    <textarea id="assessorComments" class="form-control" [(ngModel)]="working.assessorComments"></textarea>
-    <small class="form-text text-muted">What the learner could have done better and what they did well.</small>
   </div>
 
-  <label for="learnerRating">Score</label> {{working.assessorRating * 100}}%
-  <input id="learnerRating" class="form-control-range" type="range" min="0" max="1" step="0.05"
-    [(ngModel)]="working.assessorRating" />
+  <!-- Assessor Section -->
+  <div *ngIf="isAssessor">
+    <div class="form-group">
+      <label for="assessorComments">Public Comments about the assessment</label>
+      <textarea id="assessorComments" class="form-control" [(ngModel)]="working.assessorComments"></textarea>
+      <small class="form-text text-muted">What the learner could have done better and what they did well.</small>
+    </div>
 
-  <span class="form-text">Final Results</span>
-  <button class="btn btn-success">Pass</button>
-  <button class="btn btn-danger">Fail</button>
-</div>
+    <label for="learnerRating">Score</label> {{working.assessorRating * 100}}%
+    <input id="learnerRating" class="form-control-range" type="range" min="0" max="1" step="0.05"
+      [(ngModel)]="working.assessorRating" />
 
-<!-- Learner Section -->
-<div *ngIf="!isAssessor">
-  Learner
+    <span class="form-text">Final Results</span>
+    <button class="btn btn-success">Pass</button>
+    <button class="btn btn-danger">Fail</button>
+  </div>
+
+  <!-- Learner Section -->
+  <div *ngIf="!isAssessor">
+    Learner
+  </div>
 </div>

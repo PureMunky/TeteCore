@@ -3,13 +3,8 @@
   <div>
 
     <!-- Topic, Role, and Other Person -->
-    <h2>{{currentMentorship.topic.name}}</h2>
-    <div style="margin-left: 10px;">
-      <h6>as a {{currentMentorship.learnerUserId == currentUser.userId ? 'Learner' : 'Mentor'}}</h6>
-      <h6 *ngIf="working.otherPerson">
-        with <teteProfileLink [user]="working.otherPerson" style="font-weight: bold;"></teteProfileLink>
-      </h6>
-    </div>
+    <teteTopicHeader [topic]="currentMentorship.topic" [currentUser]="currentUser" [learner]="currentMentorship.learner"
+      [mentor]="currentMentorship.mentor" [mentorTitle]="'a Mentor'"></teteTopicHeader>
 
     <!-- Unsaved Private Details Alert -->
     <div class="alert alert-info" *ngIf="working.unsavedContact && currentMentorship.hasMentor">

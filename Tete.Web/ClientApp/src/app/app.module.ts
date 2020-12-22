@@ -28,6 +28,7 @@ import { UserSettingsComponent } from "./components/userSettings/userSettings.co
 import { TosComponent } from "./components/legal/tos.component";
 import { PrivacyComponent } from "./components/legal/privacy.component";
 import { AssessmentComponent } from "./components/mentorship/assessment.component";
+import { TopicHeader } from "./components/topic/topicHeader.component";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { AssessmentComponent } from "./components/mentorship/assessment.componen
     UserSettingsComponent,
     TosComponent,
     PrivacyComponent,
-    AssessmentComponent
+    AssessmentComponent,
+    TopicHeader
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: "ng-cli-universal" }),

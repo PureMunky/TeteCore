@@ -1,0 +1,7 @@
+<h2>{{topic.name}}</h2>
+<div style="margin-left: 10px;">
+  <h6>as {{userTitle()}}</h6>
+  <h6 *ngIf="otherPerson()">
+    with <teteProfileLink [user]="otherPerson()" style="font-weight: bold;"></teteProfileLink>
+  </h6>
+</div>
