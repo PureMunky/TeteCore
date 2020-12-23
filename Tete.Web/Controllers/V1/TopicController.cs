@@ -73,6 +73,16 @@ namespace Tete.Api.Controllers
       return new Response<MentorshipVM>(service.ClaimNextMentorship(UserId, TopicId));
     }
 
+    [HttpPost]
+    public Response<AssessmentVM> ClaimNextAssessment(Guid UserId, Guid TopicId)
+    {
+      var service = new Services.Relationships.AssessmentService(Context, CurrentUser);
+
+      LogService.Write("Claim next mentorship", String.Format("User:{0};Topic:{1}", UserId.ToString(), TopicId.ToString()));
+
+      return new Response<AssessmentVM>(service.ClaimNextAssessment(UserId, TopicId));
+    }
+
     [HttpGet]
     public Response<TopicVM> Search(string searchText)
     {

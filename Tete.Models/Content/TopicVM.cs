@@ -25,6 +25,7 @@ namespace Tete.Models.Content
     public int OpenMentorships { get; set; }
 
     public List<MentorshipVM> Mentorships { get; set; }
+    public List<AssessmentVM> Assessments { get; set; }
 
     public List<Link> Links { get; set; }
     public List<Keyword> Keywords { get; set; }

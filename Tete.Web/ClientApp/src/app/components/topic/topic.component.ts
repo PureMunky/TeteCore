@@ -121,4 +121,10 @@ export class TopicComponent {
     });
   }
 
+  public claimNextAssessment() {
+    this.topicService.ClaimNextAssessment(this.currentUser.userId, this.currentTopic.topicId).then(a => {
+      this.router.navigate(['/assessment/', a.assessmentId]);
+    });
+  }
+
 }

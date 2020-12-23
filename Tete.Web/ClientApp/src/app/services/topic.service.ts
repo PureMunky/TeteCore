@@ -42,6 +42,12 @@ export class TopicService {
     });
   }
 
+  public ClaimNextAssessment(UserId: string, TopicId: string): Promise<any> {
+    return this.apiService.post("/V1/Topic/ClaimNextAssessment?UserId=" + UserId + "&TopicId=" + TopicId, {}).then(a => {
+      return a[0];
+    });
+  }
+
   public GetTopic(topicId: string) {
     return this.apiService.get("/V1/Topic/GetTopic?topicId=" + topicId, 0).then(t => {
       return t[0];

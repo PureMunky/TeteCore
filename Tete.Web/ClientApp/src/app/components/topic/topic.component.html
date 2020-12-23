@@ -100,7 +100,10 @@
       <button class="btn btn-secondary" *ngIf="currentTopic.mentorships.length > 0" (click)="claimNextMentorship()">I'm
         ready for a new
         learner.</button>
-      <div class="alert alert-info" *ngIf="currentTopic.mentorships.length == 0">
+      <button class="btn btn-secondary" (click)="claimNextAssessment()">I'm ready to test someone.</button>
+
+      <div class="alert alert-info"
+        *ngIf="currentTopic.mentorships.length == 0 && currentTopic.assessments.length == 0">
         There are no waiting learners at the moment.
       </div>
     </div>

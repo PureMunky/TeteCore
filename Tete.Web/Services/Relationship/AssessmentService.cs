@@ -82,6 +82,34 @@ namespace Tete.Api.Services.Relationships
 
       return rtnList;
     }
+
+    public IQueryable<AssessmentVM> OpenAssessments(Guid UserId, Guid TopicId)
+    {
+      return this.mainContext.Assessments.Where(a => a.Active && a.TopicId == TopicId && a.AssessorUserId == Guid.Empty && a.LearnerUserId != UserId).Select(a => new AssessmentVM(a));
+    }
+
+    public AssessmentVM ClaimNextAssessment(Guid UserId, Guid TopicId)
+    {
+      AssessmentVM rtnAssessment = null;
+
+      if (UserId == this.Actor.UserId || this.Actor.Roles.Contains("Admin"))
+      {
+        var dbAssessment = OpenAssessments(UserId, TopicId).OrderBy(a => a.CreatedDate).FirstOrDefault();
+        var dbUserTopic = TopicService.GetUserTopics(UserId, TopicId).FirstOrDefault();
+
+        if (dbAssessment != null && dbUserTopic != null && dbUserTopic.Status == TopicStatus.Mentor)
+        {
+          dbAssessment.AssessorUserId = UserId;
+          dbAssessment.AssignedDate = DateTime.UtcNow;
+          this.mainContext.Update(dbAssessment);
+          this.mainContext.SaveChanges();
+
+          rtnAssessment = GetAssessment(dbAssessment.AssessmentId);
+        }
+      }
+
+      return rtnAssessment;
+    }
     #endregion
 
 
