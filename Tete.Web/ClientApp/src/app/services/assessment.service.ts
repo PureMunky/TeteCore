@@ -36,4 +36,10 @@ export class AssessmentService {
     });
   }
 
+  public CloseAssessment(results) {
+    this.apiService.post("/V1/Assessment/CloseAssessment", results).then(a => {
+      a[0];
+    });
+  }
+
 }

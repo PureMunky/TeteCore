@@ -123,7 +123,7 @@ namespace Tete.Api.Services.Content
         if (dbUserTopic != null && rtnTopic.UserTopic.Status == TopicStatus.Mentor)
         {
           rtnTopic.Mentorships = MentorshipService.OpenMentorships(this.Actor.UserId, topicId).Select(m => new MentorshipVM(m, null)).ToList();
-          rtnTopic.Assessments = AssessmentService.OpenAssessments(this.Actor.UserId, topicId).ToList();
+          rtnTopic.Assessments = AssessmentService.OpenAssessments(this.Actor.UserId, topicId).Select(a => new AssessmentVM(a)).ToList();
         }
       }
 

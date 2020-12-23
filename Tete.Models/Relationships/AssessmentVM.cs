@@ -34,16 +34,30 @@ namespace Tete.Models.Relationships
     public AssessmentVM(Assessment assessment)
     {
       this.AssessmentId = assessment.AssessmentId;
+
+      this.TopicId = assessment.TopicId;
+
+      this.Active = assessment.Active;
+
+      this.CreatedDate = assessment.CreatedDate;
+
+      this.MentorshipId = assessment.MentorshipId;
+
       this.LearnerUserId = assessment.LearnerUserId;
       this.LearnerDetails = assessment.LearnerDetails;
+
       this.AssessorUserId = assessment.AssessorUserId;
       this.AssessorDetails = assessment.AssessorDetails;
-      this.TopicId = assessment.TopicId;
-      this.MentorshipId = assessment.MentorshipId;
-      this.Active = assessment.Active;
-      this.CreatedDate = assessment.CreatedDate;
       this.AssessorComments = assessment.AssessorComments;
-      this.HasAssessor = false;
+
+      this.AssessmentResult = assessment.AssessmentResult;
+      this.Score = assessment.Score;
+
+      this.CompletedDate = assessment.CompletedDate;
+      this.AssignedDate = assessment.AssignedDate;
+
+      this.HasAssessor = (assessment.AssessorUserId != Guid.Empty);
+
     }
   }
 }

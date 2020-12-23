@@ -37,5 +37,13 @@ namespace Tete.Api.Controllers
       return new Response<AssessmentVM>(service.GetUserAssessments(UserId));
     }
 
+    [HttpPost]
+    public Response<AssessmentVM> CloseAssessment([FromBody] AssessmentResults results)
+    {
+      var service = new Services.Relationships.AssessmentService(Context, CurrentUser);
+
+      return new Response<AssessmentVM>(service.CloseAssessment(results));
+    }
+
   }
 }

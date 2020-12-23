@@ -83,9 +83,9 @@ namespace Tete.Api.Services.Relationships
       return rtnList;
     }
 
-    public IQueryable<AssessmentVM> OpenAssessments(Guid UserId, Guid TopicId)
+    public IQueryable<Assessment> OpenAssessments(Guid UserId, Guid TopicId)
     {
-      return this.mainContext.Assessments.Where(a => a.Active && a.TopicId == TopicId && a.AssessorUserId == Guid.Empty && a.LearnerUserId != UserId).Select(a => new AssessmentVM(a));
+      return this.mainContext.Assessments.Where(a => a.Active && a.TopicId == TopicId && a.AssessorUserId == Guid.Empty && a.LearnerUserId != UserId);
     }
 
     public AssessmentVM ClaimNextAssessment(Guid UserId, Guid TopicId)
@@ -106,6 +106,28 @@ namespace Tete.Api.Services.Relationships
 
           rtnAssessment = GetAssessment(dbAssessment.AssessmentId);
         }
+      }
+
+      return rtnAssessment;
+    }
+
+    public AssessmentVM CloseAssessment(AssessmentResults results)
+    {
+      AssessmentVM rtnAssessment = null;
+
+      var dbAssessment = this.mainContext.Assessments.Where(a => a.AssessmentId == results.AssessmentId).FirstOrDefault();
+
+      if (dbAssessment != null && (dbAssessment.AssessorUserId == this.Actor.UserId || this.Actor.Roles.Contains("Admin")))
+      {
+        dbAssessment.AssessmentResult = results.Pass;
+        dbAssessment.Score = results.Score;
+        dbAssessment.AssessorComments = results.Comments;
+        dbAssessment.CompletedDate = DateTime.UtcNow;
+        dbAssessment.Active = false;
+        this.mainContext.Assessments.Update(dbAssessment);
+        this.mainContext.SaveChanges();
+
+        rtnAssessment = GetAssessment(dbAssessment.AssessmentId);
       }
 
       return rtnAssessment;

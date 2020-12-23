@@ -49,4 +49,13 @@ export class AssessmentComponent {
       this.working.loading = false;
     });
   }
+
+  public closeAssessment(pass: boolean) {
+    this.assessmentService.CloseAssessment({
+      assessmentId: this.currentAssessment.assessmentId,
+      comments: this.working.assessorComments,
+      score: this.working.assessorRating,
+      pass: pass
+    });
+  }
 }
