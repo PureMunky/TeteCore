@@ -91,11 +91,10 @@
       <button class="btn btn-secondary" (click)="learn()">Request a Mentor</button>
       <button class="btn btn-secondary" (click)="teach()" *ngIf="!currentTopic.elligible || adminUser">Register as a
         Mentor</button>
-      <button class="btn btn-secondary" (click)="assessment()" *ngIf="currentTopic.userAssessments.length == 0">Request
-        an Assessment</button>
     </div>
-
-    <div *ngIf="currentTopic.userTopic &&  currentTopic.userTopic.status == 4">
+    <button class="btn btn-secondary" (click)="assessment()">Request
+      an Assessment</button>
+    <div *ngIf="currentTopic.userTopic && currentTopic.userTopic.status == 4">
       <!-- Mentor Controls -->
       <button class="btn btn-secondary" *ngIf="currentTopic.mentorships.length > 0" (click)="claimNextMentorship()">I'm
         ready for a new

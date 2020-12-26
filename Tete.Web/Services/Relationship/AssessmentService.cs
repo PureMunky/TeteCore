@@ -38,7 +38,7 @@ namespace Tete.Api.Services.Relationships
           {
             if (dbMentorship != null && !dbMentorship.Active)
             {
-              MentorshipId = dbAssessment.MentorshipId;
+              MentorshipId = dbMentorship.MentorshipId;
             }
 
             var newAssessment = new Assessment(UserId, TopicId, MentorshipId);
@@ -125,6 +125,12 @@ namespace Tete.Api.Services.Relationships
         dbAssessment.CompletedDate = DateTime.UtcNow;
         dbAssessment.Active = false;
         this.mainContext.Assessments.Update(dbAssessment);
+
+        if (dbAssessment.AssessmentResult)
+        {
+          TopicService.SetUserTopic(dbAssessment.LearnerUserId, dbAssessment.TopicId, TopicStatus.Graduate);
+        }
+
         this.mainContext.SaveChanges();
 
         rtnAssessment = GetAssessment(dbAssessment.AssessmentId);

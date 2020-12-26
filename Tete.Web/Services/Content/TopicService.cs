@@ -308,6 +308,81 @@ namespace Tete.Api.Services.Content
       }
     }
 
+    public void SetUserTopic(Guid UserId, Guid TopicId, TopicStatus topicStatus)
+    {
+      /*
+        TOPIC STATUS PROGRESSION
+
+        Elligible (enforced order)
+        1. Register as a Learner (Novice)
+          - Self
+        2. Pass Assessment (Graduate)
+          - Mentor/Deacon
+        3. Take on a Learner and rated favorably (Master) [optional]
+          - Novice
+        4. Request to be a Mentor (Mentor)
+          - Mentor/Deacon
+        5. Top 10% of Mentors (Deacon) [calculated yearly?]
+          - Administration
+
+        Non-Ellgible (no order)
+        - Register as a Learner (Novice)
+        - Register as a Mentor (Mentor)
+      */
+      var dbUserTopic = GetUserTopics(UserId, TopicId).AsNoTracking().FirstOrDefault();
+      var dbTopic = GetTopic(TopicId);
+
+      if (this.Actor.Roles.Contains("Admin"))
+      {
+        SetUserTopicStatus(UserId, TopicId, topicStatus);
+      }
+      else if (dbTopic.Elligible)
+      {
+        if (topicStatus == TopicStatus.Novice && this.Actor.UserId == UserId)
+          SetUserTopic(UserId, TopicId, topicStatus);
+        else if (this.Actor.UserId != UserId)
+        {
+          var dbActorTopic = GetUserTopics(this.Actor.UserId, TopicId).FirstOrDefault();
+
+          if (
+            (topicStatus == TopicStatus.Master && dbActorTopic.Status == TopicStatus.Novice)
+            || (topicStatus != TopicStatus.Master && dbActorTopic.Status >= TopicStatus.Mentor)
+          )
+          {
+            if (dbUserTopic.Status == (topicStatus - 1))
+              SetUserTopicStatus(UserId, TopicId, topicStatus);
+            else if (dbUserTopic.Status == TopicStatus.Graduate && topicStatus == TopicStatus.Mentor)
+              SetUserTopicStatus(UserId, TopicId, topicStatus);
+          }
+        }
+      }
+      else if (
+        (this.Actor.UserId == UserId && (topicStatus == TopicStatus.Novice || topicStatus == TopicStatus.Mentor))
+        || (this.Actor.UserId != UserId && topicStatus == TopicStatus.Graduate))
+      {
+        SetUserTopicStatus(UserId, TopicId, topicStatus);
+      }
+    }
+
+    private void SetUserTopicStatus(Guid UserId, Guid TopicId, TopicStatus topicStatus)
+    {
+      var dbUserTopic = GetUserTopics(UserId, TopicId).FirstOrDefault();
+      if (dbUserTopic == null)
+      {
+        // Create a new status record.
+        var newUserTopic = new UserTopic(UserId, TopicId, topicStatus);
+        this.mainContext.UserTopics.Add(newUserTopic);
+      }
+      else if (dbUserTopic.Status < topicStatus)
+      {
+        // Only update a status if it's a better status than previous.
+        dbUserTopic.Status = topicStatus;
+        this.mainContext.UserTopics.Update(dbUserTopic);
+      }
+
+      this.mainContext.SaveChanges();
+    }
+
     private void FillData(MainContext mainContext, UserVM actor)
     {
       this.mainContext = mainContext;

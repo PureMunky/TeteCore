@@ -14,6 +14,7 @@ export class Topic {
   public links: Array<Link>;
   public shortDescription: string;
   public userMentorships: Array<Mentorship>;
+  public userAssessments: Array<any>;
 
   constructor() {
     this.name = '';
@@ -24,5 +25,6 @@ export class Topic {
     this.keywords = [];
     this.links = [];
     this.userMentorships = [];
+    this.userAssessments = [];
   }
 }

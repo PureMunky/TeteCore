@@ -32,7 +32,7 @@ namespace Tete.Api.Services.Relationships
           this.mainContext.Mentorships.Add(newMentorship);
         }
 
-        SetUserTopic(UserId, TopicId, TopicStatus.Novice);
+        TopicService.SetUserTopic(UserId, TopicId, TopicStatus.Novice);
 
         this.mainContext.SaveChanges();
       }
@@ -45,7 +45,7 @@ namespace Tete.Api.Services.Relationships
       {
         if (!topic.Elligible || this.Actor.Roles.Contains("Admin"))
         {
-          SetUserTopic(UserId, TopicId, TopicStatus.Mentor);
+          TopicService.SetUserTopic(UserId, TopicId, TopicStatus.Mentor);
         }
 
         // TODO: Test elligible flip after 30 mentors.
@@ -244,23 +244,6 @@ namespace Tete.Api.Services.Relationships
     #endregion
 
     #region Private Functions
-
-    // TODO: Consider moving SetUserTopic to TopicService.
-    private void SetUserTopic(Guid UserId, Guid TopicId, TopicStatus topicStatus)
-    {
-      if (UserId == this.Actor.UserId || this.Actor.Roles.Contains("Admin"))
-      {
-        var dbUserTopic = TopicService.GetUserTopics(UserId, TopicId).FirstOrDefault();
-
-        if (dbUserTopic == null)
-        {
-          var newUserTopic = new UserTopic(UserId, TopicId, topicStatus);
-          this.mainContext.UserTopics.Add(newUserTopic);
-        }
-
-        this.mainContext.SaveChanges();
-      }
-    }
 
     private MentorshipVM GetMentorshipVM(Mentorship mentorship)
     {
