@@ -227,7 +227,15 @@ namespace Tete.Tests.Setup
 
       var keywords = new List<Keyword>()
       {
-        existingkeyword
+        existingkeyword,
+        new Keyword() {
+          Name = "Restricted",
+          Restricted = true
+        },
+        new Keyword() {
+          Name = "Inactive",
+          Active = false
+        }
       }.AsQueryable();
 
       var topicKeywords = new List<TopicKeyword>()
