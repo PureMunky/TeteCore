@@ -53,7 +53,7 @@ namespace Tete.Tests.Api.Services.Relationship
     [Test]
     public void RegisterMentorNewElligible()
     {
-      this.service.RegisterMentor(existingUserId, largeTopicId);
+      this.service.RegisterMentor(existingUserId, brinkTopicId);
       mockContext.Verify(m => m.Topics.Update(It.IsAny<Tete.Models.Content.Topic>()), Times.Once);
     }
 

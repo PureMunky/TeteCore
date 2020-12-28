@@ -27,6 +27,12 @@ namespace Tete.Tests.Setup
       UserName = "admin"
     };
 
+    protected Guid noviceUserId = Guid.NewGuid();
+    protected Guid graduateUserId = Guid.NewGuid();
+    protected Guid masterUserId = Guid.NewGuid();
+    protected Guid mentorUserId = Guid.NewGuid();
+    protected Guid deaconUserId = Guid.NewGuid();
+
     protected string settingKey = "settingKey1";
 
     public UserVM AdminUserVM
@@ -44,6 +50,7 @@ namespace Tete.Tests.Setup
 
     public Guid linkId = Guid.NewGuid();
     public Guid existingTopicId = Guid.NewGuid();
+    public Guid brinkTopicId = Guid.NewGuid();
     public Guid largeTopicId = Guid.NewGuid();
 
     public string keyword = "existingkeyword";
@@ -119,10 +126,30 @@ namespace Tete.Tests.Setup
       var users = new List<User> {
         existingUser,
         adminUser,
-        newUser
+        newUser,
+        new User() {
+          Id = noviceUserId,
+          UserName = "novice"
+        },
+        new User() {
+          Id = graduateUserId,
+          UserName = "graduate"
+        },
+        new User() {
+          Id = masterUserId,
+          UserName = "master"
+        },
+        new User() {
+          Id = mentorUserId,
+          UserName = "mentor"
+        },
+        new User() {
+          Id = deaconUserId,
+          UserName = "deacon"
+        }
       };
 
-      for (int i = 0; i < 30; i++)
+      for (int i = 0; i < 35; i++)
       {
         users.Add(new User()
         {
@@ -180,10 +207,16 @@ namespace Tete.Tests.Setup
           TopicId = existingTopicId,
           Name = "Existing Topic Name"
         },
+        new Topic() {
+          TopicId = brinkTopicId,
+          Name = "Brink of Elligbility",
+          Description = "This topic is budding and on the brink of elligibility."
+        },
         new Topic(){
           TopicId = largeTopicId,
           Name = "Large Establised Topic",
-          Description = "Lots of things going on in this topic."
+          Description = "Lots of things going on in this topic.",
+          Elligible = true
         }
       };
 
@@ -217,7 +250,12 @@ namespace Tete.Tests.Setup
 
       var userTopics = new List<UserTopic>()
       {
-        new UserTopic(adminUser.Id, existingTopicId, TopicStatus.Mentor)
+        new UserTopic(adminUser.Id, existingTopicId, TopicStatus.Mentor),
+        new UserTopic(noviceUserId, largeTopicId, TopicStatus.Novice),
+        new UserTopic(graduateUserId, largeTopicId, TopicStatus.Graduate),
+        new UserTopic(masterUserId, largeTopicId, TopicStatus.Master),
+        new UserTopic(mentorUserId, largeTopicId, TopicStatus.Mentor),
+        new UserTopic(deaconUserId, largeTopicId, TopicStatus.Deacon)
       };
 
       foreach (User u in users)
@@ -225,6 +263,7 @@ namespace Tete.Tests.Setup
         if (u.UserName != null && u.UserName.StartsWith("dummy"))
         {
           userTopics.Add(new UserTopic(adminUser.Id, largeTopicId, TopicStatus.Mentor));
+          userTopics.Add(new UserTopic(adminUser.Id, brinkTopicId, TopicStatus.Mentor));
         }
       }
 

@@ -339,7 +339,7 @@ namespace Tete.Api.Services.Content
       else if (dbTopic.Elligible)
       {
         if (topicStatus == TopicStatus.Novice && this.Actor.UserId == UserId)
-          SetUserTopic(UserId, TopicId, topicStatus);
+          SetUserTopicStatus(UserId, TopicId, topicStatus);
         else if (this.Actor.UserId != UserId)
         {
           var dbActorTopic = GetUserTopics(this.Actor.UserId, TopicId).FirstOrDefault();

@@ -6,6 +6,7 @@ using NUnit.Framework;
 using Tete.Api.Contexts;
 using Tete.Api.Services.Content;
 using Tete.Models.Content;
+using Tete.Models.Relationships;
 using Tete.Tests.Setup;
 
 namespace Tete.Tests.Api.Services.Content
@@ -18,6 +19,12 @@ namespace Tete.Tests.Api.Services.Content
     public void SetupSettings()
     {
       this.service = new TopicService(mockContext.Object, AdminUserVM);
+    }
+
+    private TopicService GetService(Guid ActorUserId)
+    {
+      var Actor = this.mockContext.Object.Users.Where(u => u.Id == ActorUserId).FirstOrDefault();
+      return new TopicService(mockContext.Object, new Tete.Models.Authentication.UserVM(Actor));
     }
 
     // [Test]
@@ -135,7 +142,7 @@ namespace Tete.Tests.Api.Services.Content
     {
       var result = this.service.GetKeywords();
 
-      Assert.AreEqual(1, result.Count()); 
+      Assert.AreEqual(1, result.Count());
     }
 
     [Test]
@@ -165,5 +172,48 @@ namespace Tete.Tests.Api.Services.Content
 
       mockContext.Verify(c => c.Links.Add(It.IsAny<Link>()), Times.Once);
     }
+
+    #region Set User Topic Tests
+
+    private void TestSetUserTopic(Guid ActorUserId, Guid UserId, Guid TopicId, TopicStatus topicStatus, Times times)
+    {
+      var service = GetService(ActorUserId);
+      service.SetUserTopic(UserId, TopicId, topicStatus);
+      mockContext.Verify(c => c.UserTopics.Add(It.IsAny<UserTopic>()), times);
+    }
+
+    [Test]
+    public void SetUserTopicTestElligibleNewNovice()
+    {
+      TestSetUserTopic(newUserId, newUserId, largeTopicId, TopicStatus.Novice, Times.Once());
+    }
+
+    [Test]
+    public void SetUserTopicTestElligibleNewGraduate()
+    {
+      TestSetUserTopic(newUserId, newUserId, largeTopicId, TopicStatus.Graduate, Times.Never());
+    }
+
+    [Test]
+    public void SetUserTopicTestElligibleNewMaster()
+    {
+      TestSetUserTopic(newUserId, newUserId, largeTopicId, TopicStatus.Master, Times.Never());
+    }
+
+    [Test]
+    public void SetUserTopicTestElligibleNewMentor()
+    {
+      TestSetUserTopic(newUserId, newUserId, largeTopicId, TopicStatus.Mentor, Times.Never());
+    }
+
+    [Test]
+    public void SetUserTopicTestElligibleNewDeacon()
+    {
+      TestSetUserTopic(newUserId, newUserId, largeTopicId, TopicStatus.Deacon, Times.Never());
+    }
+
+    // TODO: Write existing user topic tests. 
+    #endregion
+
   }
 }
