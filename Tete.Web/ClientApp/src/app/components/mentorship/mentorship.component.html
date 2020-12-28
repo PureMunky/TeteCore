@@ -90,15 +90,20 @@
       <h4>Closing Mentorship</h4>
       <div *ngIf="currentMentorship.mentor">
         <div *ngIf="working.showLearner">
-          <div>
+          <div class="alert alert-warning">
             By closing this mentorship you agree that you no longer require anything from
             {{currentMentorship.mentor.displayName}}.
           </div>
-          <div>How would you rate {{currentMentorship.mentor.displayName}}?</div>
-          <input type="number" name="mentorRating" [(ngModel)]="working.evaluation.rating" min="0" max="5">
-          <p>Any comments you'd like to leave regarding your experience with {{currentMentorship.mentor.displayName}}?
-          </p>
-          <textarea [(ngModel)]="working.evaluation.comments"></textarea>
+          <label for="mentorRating">
+            How would you rate <strong>{{currentMentorship.mentor.displayName}}</strong> as a mentor?
+          </label>
+          <input id="mentorRating" class="form-control-range" type="range" min="1" max="5"
+            [(ngModel)]="working.evaluation.rating">
+          <small class="form-text text-muted">{{translateRating(working.evaluation.rating)}}</small>
+          <label for="learnerComments" class="form-text">
+            Any comments you'd like to leave regarding your experience with {{currentMentorship.mentor.displayName}}?
+          </label>
+          <textarea id="learnerComments" class="form-control" [(ngModel)]="working.evaluation.comments"></textarea>
         </div>
 
         <div *ngIf="working.showMentor">
