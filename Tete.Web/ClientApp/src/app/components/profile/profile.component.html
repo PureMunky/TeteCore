@@ -1,4 +1,4 @@
-<h1>{{user.displayName}} Profile</h1>
+<h1>{{user.displayName}}'s Profile</h1>
 <div class="alert alert-primary" *ngIf="!user.userName">
   Register or log in to an existing account <a routerLink="/settings">here</a>.<br />
   If you register for a <strong>free</strong> full account you'll be able to:
@@ -16,23 +16,30 @@
     While you're at it why don't you put some ice-breaker details for your about.
   </div>
   <div *ngIf="user.userName">
-    <div>
-      Go to <a routerLink="/settings">Settings</a> to change your username or password.
-    </div>
-    <div>
-      <span id="txtDisplaynameLabel">Name</span><br />
-      <input class="form-control" type="text" aria-labelledby="txtDisplaynameLabel" id="txtDisplayName"
-        [(ngModel)]="user.displayName" />
-    </div>
-    <div>
-      <span id="txtAboutLabel">About</span><br />
-      <textarea id="txtAbout" class="form-control" aria-labelledby="txtAboutLabel"
-        [(ngModel)]="user.profile.about"></textarea>
+    <div class="form-group">
+      To change your username or password: go to <a routerLink="/settings">settings</a>.
     </div>
 
-    <div>
-      <span aria-labelledby="txtPrivateAbout">Private About</span><br />
+    <div class="form-group">
+      <label for="txtDisplayName">Name</label>
+      <input class="form-control" type="text" id="txtDisplayName" [(ngModel)]="user.displayName" />
+    </div>
+
+    <div class="form-group">
+      <label for="txtAbout">About</label>
+      <textarea id="txtAbout" class="form-control" [(ngModel)]="user.profile.about"></textarea>
+      <small class="form-text text-muted">
+        Your public bio is available to anyone who finds your profile.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label for="txtPrivateAbout">Private About</label>
       <textarea id="txtPrivateAbout" class="form-control" [(ngModel)]="user.profile.privateAbout"></textarea>
+      <small class="form-text text-muted">
+        This is private and will be used as a starting point for your private details in any mentorship you start but
+        will not be displayed until you save it for that mentorship.
+      </small>
     </div>
 
     <div *ngIf="false">

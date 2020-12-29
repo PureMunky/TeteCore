@@ -41,7 +41,6 @@ export class ProfileComponent {
       } else {
         this.user = JSON.parse(JSON.stringify(this.currentUser));
         this.working.self = true;
-        this.working.editing = true;
       }
     });
 
