@@ -23,6 +23,7 @@ namespace Tete.Models.Content
     public UserTopicVM UserTopic { get; set; }
 
     public int OpenMentorships { get; set; }
+    public int MentorCount { get; set; }
 
     public List<MentorshipVM> Mentorships { get; set; }
     public List<AssessmentVM> Assessments { get; set; }

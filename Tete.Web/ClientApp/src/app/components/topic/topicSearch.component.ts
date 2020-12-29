@@ -31,6 +31,7 @@ export class TopicSearchComponent {
   }
 
   public Search() {
+    console.log(this.tmp);
     this.search.done = false;
     this.topicService.Search(this.tmp.searchText).then(d => {
       this.topics = d;
