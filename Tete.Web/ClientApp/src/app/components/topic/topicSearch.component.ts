@@ -31,13 +31,12 @@ export class TopicSearchComponent {
   }
 
   public Search() {
-    console.log(this.tmp);
     this.search.done = false;
     this.topicService.Search(this.tmp.searchText).then(d => {
       this.topics = d;
       this.search.done = true;
       this.search.text = this.tmp.searchText;
-      this.search.newTopic = !this.topics.some(t => t.name == this.search.text);
+      this.search.newTopic = !this.topics.some(t => t.name.toLowerCase() == this.search.text.toLowerCase());
     });
   }
 }

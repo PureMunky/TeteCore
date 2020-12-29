@@ -8,7 +8,8 @@
   <teteMentorList [mentorships]="teachingMentorships" [assessments]="teachingAssessments"></teteMentorList>
 </div>
 
-<div class="section" *ngIf="learningMentorships.length == 0 && teachingMentorships.length == 0">
+<div class="section"
+  *ngIf="(learningMentorships.length == 0 || learningAssessments.length == 0) && (teachingMentorships.length == 0 || teachingAssessments.length == 0)">
   <h2>Topic Search</h2>
   <teteTopicSearch></teteTopicSearch>
 </div>

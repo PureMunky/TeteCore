@@ -39,7 +39,6 @@ export class AssessmentComponent {
   public load(assessmentId: string) {
     this.assessmentService.GetAssessment(assessmentId).then(a => {
       this.currentAssessment = a;
-      console.log(a.learner);
       this.isAssessor = (this.currentUser.userId == this.currentAssessment.assessorUserId);
       if (this.currentAssessment.learnerUserId == this.currentUser.userId && this.currentAssessment.assessor) {
         this.working.otherPerson = this.currentAssessment.assessor;
