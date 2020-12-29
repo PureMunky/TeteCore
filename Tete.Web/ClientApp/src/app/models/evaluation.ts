@@ -5,4 +5,8 @@ export class Evaluation {
   public createdDate: Date;
   public rating: number;
   public comments: string;
+
+  constructor() {
+    this.rating = 3;
+  }
 }
