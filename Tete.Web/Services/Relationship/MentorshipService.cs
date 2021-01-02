@@ -48,7 +48,6 @@ namespace Tete.Api.Services.Relationships
           TopicService.SetUserTopic(UserId, TopicId, TopicStatus.Mentor);
         }
 
-        // TODO: Test elligible flip after 30 mentors.
         if (!topic.Elligible)
         {
           var dbMentorCount = this.mainContext.UserTopics.Where(ut => ut.TopicId == TopicId && ut.Status == TopicStatus.Mentor).Count();
@@ -56,6 +55,10 @@ namespace Tete.Api.Services.Relationships
           {
             TopicService.MakeElligible(topic.TopicId);
           }
+        }
+        else
+        {
+          VoteService.CreateMentorApplication(UserId, TopicId);
         }
       }
     }

@@ -63,15 +63,19 @@
     <span class="badge badge-primary" *ngFor="let keyword of currentTopic.keywords">{{keyword.name}}</span>
   </div>
 
+  <div class="alert alert-success" *ngIf="currentTopic.elligible">
+    <strong>This topic is popular!</strong>
+  </div>
+
   <div class="alert alert-info" *ngIf="currentTopic.userMentorships.length > 0">
     You have an existing mentorship for this topic.
     Click <a [routerLink]="['/mentorship', currentTopic.userMentorships[0].mentorshipId]">here</a> to open it.
   </div>
-  <!-- FIXME: Console error on loading. -->
+
   <div class="alert alert-info" *ngIf="currentTopic.userAssessments.length > 0">
     Open Assessments:
     <div *ngFor="let assessment of currentTopic.userAssessments">
-      <a [routerLink]="['/assessment', assessment.assessmentId]">Assessment</a>
+      <a [routerLink]="['/assessment', assessment.assessmentId]">{{assessment.learner.displayName}}</a>
     </div>
   </div>
 
@@ -89,7 +93,7 @@
 
     <div *ngIf="(!currentTopic.userTopic) && currentTopic.topicId">
       <button class="btn btn-secondary" (click)="learn()">Request a Mentor</button>
-      <button class="btn btn-secondary" (click)="teach()" *ngIf="!currentTopic.elligible || adminUser">Register as a
+      <button class="btn btn-secondary" (click)="teach()">Register as a
         Mentor</button>
     </div>
     <button class="btn btn-secondary" (click)="assessment()" *ngIf="currentTopic.MentorCount > 0">Request

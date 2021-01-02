@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Tete.Models.Relationships;
+using Tete.Models.Voting;
 
 namespace Tete.Models.Content
 {
@@ -33,6 +34,7 @@ namespace Tete.Models.Content
 
     public List<MentorshipVM> UserMentorships { get; set; }
     public List<AssessmentVM> UserAssessments { get; set; }
+    public List<Vote> Votes { get; set; }
 
     public string ShortDescription
     {

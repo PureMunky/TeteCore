@@ -121,6 +121,8 @@ namespace Tete.Api.Services.Content
         rtnTopic.UserMentorships = MentorshipService.GetUserMentorships(this.Actor.UserId, topicId);
         rtnTopic.UserAssessments = AssessmentService.GetUserAssessments(this.Actor.UserId, topicId);
         rtnTopic.MentorCount = this.mainContext.UserTopics.Where(ut => ut.TopicId == topicId && ut.Status >= TopicStatus.Mentor).Count();
+        rtnTopic.Votes = this.mainContext.Votes.Where(v => v.Active && v.TopicId == topicId).ToList();
+
         if (dbUserTopic != null && rtnTopic.UserTopic.Status == TopicStatus.Mentor)
         {
           rtnTopic.Mentorships = MentorshipService.OpenMentorships(this.Actor.UserId, topicId).Select(m => new MentorshipVM(m, null)).ToList();

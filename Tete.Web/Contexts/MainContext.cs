@@ -36,6 +36,13 @@ namespace Tete.Api.Contexts
     public virtual DbSet<Tete.Models.Content.Keyword> Keywords { get; set; }
     public virtual DbSet<Tete.Models.Content.TopicKeyword> TopicKeywords { get; set; }
 
+
+    // Voting
+    public virtual DbSet<Tete.Models.Voting.Vote> Votes { get; set; }
+    public virtual DbSet<Tete.Models.Voting.VoteEntry> VoteEntries { get; set; }
+    public virtual DbSet<Tete.Models.Voting.MentorApplication> VoteMentorApplications { get; set; }
+    public virtual DbSet<Tete.Models.Voting.TopicChange> VoteTopicChanges { get; set; }
+
     public MainContext(DbContextOptions options) : base(options)
     {
     }

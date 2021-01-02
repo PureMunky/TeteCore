@@ -48,5 +48,13 @@ namespace Tete.Api.Services
         return new Relationships.AssessmentService(this.mainContext, this.Actor);
       }
     }
+
+    protected Voting.VoteService VoteService
+    {
+      get
+      {
+        return new Voting.VoteService(this.mainContext, this.Actor);
+      }
+    }
   }
 }
