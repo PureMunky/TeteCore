@@ -56,5 +56,13 @@ namespace Tete.Api.Services
         return new Voting.VoteService(this.mainContext, this.Actor);
       }
     }
+
+    protected Users.UserService UserService
+    {
+      get
+      {
+        return new Users.UserService(this.mainContext, this.Actor);
+      }
+    }
   }
 }

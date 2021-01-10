@@ -28,9 +28,12 @@ namespace Tete.Api.Services.Voting
 
       if (votes.Count() == 0)
       {
+        // TODO: Figure out how I want to build a vote object that allows for links for details.
         Vote newVote = new Vote()
         {
-          TopicId = topicId
+          TopicId = topicId,
+          Description = "Promote {0} to a menotr for {1}.",
+          Link = "/profile/"
         };
         MentorApplication newApplication = new MentorApplication(newVote.VoteId, userId, topicId);
 
@@ -45,6 +48,14 @@ namespace Tete.Api.Services.Voting
       }
     }
 
+    public List<VoteVM> GetTopicVotes(Guid topicId)
+    {
+      var votes = this.mainContext.Votes
+        .Where(v => v.TopicId == topicId)
+        .Join(this.mainContext.VoteEntries.Where(ve => ve.UserId == this.Actor.UserId), v => v.VoteId, ve => ve.VoteId, (v, ve) => new VoteVM(v, ve)).ToList();
+
+      return votes;
+    }
     #endregion
   }
 }

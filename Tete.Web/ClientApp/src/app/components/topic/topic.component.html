@@ -117,3 +117,15 @@
 
   <pre>{{currentTopic.description}}</pre>
 </div>
+
+<div *ngIf="votes.length > 0">
+  <h2>Votes</h2>
+  <div>
+    <div *ngFor="let vote of votes">
+      {{vote.voteId}}<br />
+      {{vote.description}}<br />
+      {{vote.link}}<br />
+      {{vote.userEntry.submitted}}
+    </div>
+  </div>
+</div>

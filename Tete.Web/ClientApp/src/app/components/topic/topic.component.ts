@@ -19,6 +19,7 @@ export class TopicComponent {
   public currentTopic: Topic = new Topic();
   public topics: Array<Topic> = [];
   public adminUser: boolean = false;
+  public votes = [];
 
   public working = {
     editing: false,
@@ -53,10 +54,13 @@ export class TopicComponent {
   }
 
   public loadTopic(topicId: string) {
-    return this.topicService.GetTopic(topicId).then(t => {
+    return Promise.all([this.topicService.GetTopic(topicId).then(t => {
       this.currentTopic = t;
       this.working.editing = false;
-    });
+    }),
+    this.topicService.GetUserVotes(topicId).then(v => {
+      this.votes = v;
+    })]);
   }
 
   public reload() {

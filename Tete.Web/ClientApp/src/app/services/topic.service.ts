@@ -73,4 +73,8 @@ export class TopicService {
   public GetKeywordTopics(keyword: string) {
     return this.apiService.get("/V1/Topic/GetKeywordTopics?keyword=" + keyword, this.longTimeout);
   }
+
+  public GetUserVotes(topicId: string) {
+    return this.apiService.get("/V1/Vote/GetTopicVotes?topicId=" + topicId, this.longTimeout);
+  }
 }
